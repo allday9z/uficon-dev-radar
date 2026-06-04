@@ -5,63 +5,104 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Email: Dev Radar H1 2026 → คุณจิ๋ง</title>
 <style>
-body{font-family:'Sarabun',sans-serif;max-width:720px;margin:40px auto;padding:0 20px;color:#1e293b;line-height:1.7}
-.header{background:#0f172a;color:white;padding:24px 28px;border-radius:10px;margin-bottom:24px}
-.header h1{margin:0;font-size:18px;font-weight:700}
-.header p{margin:4px 0 0;font-size:13px;opacity:.7}
-.field{display:flex;gap:8px;margin-bottom:6px;font-size:13px}
-.field b{min-width:60px;color:#64748b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Sarabun',sans-serif;max-width:760px;margin:40px auto;padding:0 24px;color:#1e293b;line-height:1.7;background:#f8fafc}
+.header{background:#0f172a;color:white;padding:28px 32px;border-radius:12px;margin-bottom:28px}
+.header h1{margin:0;font-size:17px;font-weight:700;line-height:1.4}
+.header p{margin:6px 0 0;font-size:12px;opacity:.5}
+.meta{background:white;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:20px;display:flex;flex-direction:column;gap:5px}
+.field{display:flex;gap:10px;font-size:13px}
+.field b{min-width:60px;color:#94a3b8;font-weight:600}
+.link-box{background:white;border:2px solid #e0e7ff;border-radius:10px;padding:18px 22px;margin:20px 0;display:flex;align-items:center;gap:14px}
+.link-box svg{flex-shrink:0;color:#4f46e5}
+.link-box div{flex:1}
+.link-box a{color:#4f46e5;font-weight:700;text-decoration:none;font-size:14px;display:block}
+.link-box small{color:#94a3b8;font-size:11px}
+.copy-section{margin:24px 0}
+.copy-section h2{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:10px}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;background:#0f172a;color:white;border:none;padding:9px 16px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;margin-bottom:10px;transition:all .15s}
+.copy-btn:hover{background:#1e293b}
+.copy-area{background:white;border:1px solid #e2e8f0;border-radius:10px;padding:20px 22px;font-size:12.5px;white-space:pre-wrap;font-family:'SF Mono','Courier New',monospace;color:#334155;line-height:1.7;max-height:420px;overflow-y:auto}
 .section{margin:24px 0}
-.section h2{font-size:15px;font-weight:700;border-bottom:2px solid #e2e8f0;padding-bottom:6px;margin-bottom:12px}
-table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
-th{text-align:left;padding:6px 10px;background:#f1f5f9;font-weight:700;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:#475569}
-td{padding:7px 10px;border-bottom:1px solid #f1f5f9}
-.badge{display:inline-block;padding:2px 8px;border-radius:100px;font-size:11px;font-weight:700}
-.live{background:#d1fae5;color:#065f46}
-.testing{background:#dbeafe;color:#1e40af}
-.inprog{background:#fef3c7;color:#92400e}
-.planned{background:#f1f5f9;color:#475569}
-.link-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px 18px;margin:12px 0;font-size:13px}
-.link-box a{color:#4f46e5;font-weight:600;text-decoration:none}
-.action-item{background:#f8fafc;border-left:3px solid #4f46e5;padding:10px 14px;margin:8px 0;border-radius:0 6px 6px 0;font-size:13px}
-.btn{display:inline-block;background:#0f172a;color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:600;margin-top:8px}
-.copy-area{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;padding:16px;font-size:12px;white-space:pre-wrap;font-family:monospace;margin-top:8px}
-.copy-btn{background:#4f46e5;color:white;border:none;padding:6px 14px;border-radius:5px;font-size:12px;cursor:pointer;margin-bottom:8px}
+.section h2{font-size:13px;font-weight:700;border-bottom:2px solid #e2e8f0;padding-bottom:8px;margin-bottom:14px;color:#334155;text-transform:uppercase;letter-spacing:.5px}
+.action-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:white;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;font-size:13.5px;color:#334155}
+.action-item svg{flex-shrink:0;margin-top:2px;color:#4f46e5}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#94a3b8;text-decoration:none;margin-top:32px}
+.back:hover{color:#475569}
 </style>
 </head>
 <body>
 <div class="header">
-  <h1>📊 Email Template — Dev Radar H1 2026 → คุณจิ๋ง (CEO)</h1>
-  <p>สร้าง 4 มิ.ย. 2569 · ใช้ copy-paste ส่งได้ทันที</p>
+  <h1><svg width="16" height="16" style="display:inline-block;vertical-align:middle;flex-shrink:0"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+  <rect x="2" y="4" rx="2" />
+</svg> &nbsp;Email Template — Dev Radar H1 2026 → คุณจิ๋ง (CEO)</h1>
+  <p>สร้าง 4 มิ.ย. 2569 · ใช้ copy-paste ส่งได้ทันที · สถานะงานดูได้ใน Lark DEV JOBS</p>
 </div>
 
-<div class="field"><b>ถึง:</b> คุณจิ๋ง — CEO, UFicon</div>
-<div class="field"><b>จาก:</b> Pongpisut M. (Dev Team)</div>
-<div class="field"><b>วันที่:</b> 4 มิถุนายน 2569</div>
-<div class="field"><b>Subject:</b> Dev Radar 2026 — สรุปผลงาน ม.ค.–พ.ค. + Action Plan ครึ่งปีหลัง</div>
+<div class="meta">
+  <div class="field"><b>ถึง</b> คุณจิ๋ง — CEO, UFicon</div>
+  <div class="field"><b>จาก</b> Pongpisut M. (Dev Team)</div>
+  <div class="field"><b>วันที่</b> 4 มิถุนายน 2569</div>
+  <div class="field"><b>Subject</b> Dev Radar 2026 — สรุปผลงาน ม.ค.–พ.ค. + Action Plan ครึ่งปีหลัง</div>
+</div>
 
 <div class="link-box">
-  🌐 <b>Presentation Link (Interactive Slides):</b><br>
-  <a href="https://allday9z.github.io/uficon-dev-radar/2026-h1/slide.html" target="_blank">
-    https://allday9z.github.io/uficon-dev-radar/2026-h1/slide.html
-  </a><br>
-  <small style="color:#64748b">กด F = Fullscreen · ← → = เปลี่ยน slide · 15 slides</small>
+  <svg width="20" height="20" style="display:inline-block;vertical-align:middle;flex-shrink:0"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 3h20" />
+  <path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" />
+  <path d="m7 21 5-5 5 5" />
+</svg>
+  <div>
+    <a href="slide.html" target="_blank">Dev Radar 2026 — Interactive Presentation</a>
+    <small>https://allday9z.github.io/uficon-dev-radar/2026-h1/slide.html &nbsp;·&nbsp; กด F = Fullscreen</small>
+  </div>
 </div>
 
-<button class="copy-btn" onclick="copyEmail()">📋 Copy Email Body</button>
-<div class="copy-area" id="emailBody">เรียน คุณจิ๋ง
+<div class="copy-section">
+  <h2>Email Body (Copy & Send)</h2>
+  <button class="copy-btn" onclick="copyEmail()"><svg width="15" height="15" style="display:inline-block;vertical-align:middle;flex-shrink:0"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+  <rect x="2" y="4" rx="2" />
+</svg> Copy Email Body</button>
+  <div class="copy-area" id="emailBody">เรียน คุณจิ๋ง
 
-ขอส่งสรุปผลการนำเสนอ Dev Radar 2026 ครึ่งปีแรก (ม.ค.–พ.ค. 2569) 
+ขอส่งสรุปผลการนำเสนอ Dev Radar 2026 ครึ่งปีแรก (ม.ค.–พ.ค. 2569)
 พร้อม action items สำหรับครึ่งปีหลัง
 
-🔗 Presentation (Interactive): https://allday9z.github.io/uficon-dev-radar/2026-h1/slide.html
+Presentation (Interactive Slides):
+https://allday9z.github.io/uficon-dev-radar/2026-h1/slide.html
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ผลงานครึ่งปีแรก (ม.ค.–พ.ค. 2569)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 • ระบบ Live ในมือลูกค้า: 5 ระบบ
-• Projects ทั้งหมด: 12 projects  
+• Projects ทั้งหมด: 12 projects
 • Bug Fixes: 82 รายการ
 • Production Hotfixes: 12 ครั้ง (resolve ทุกครั้งภายใน 1 ชั่วโมง)
 
@@ -77,29 +118,16 @@ Action Items ครึ่งปีหลัง
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 1. Infrastructure
-   - นัดคุย: พี่อ้น + พี่ทอม
-   - หารือการแบ่งหน้าที่ support Infrastructure
-   - จัดเรียง access level (พี่อ้น = สิทธิ์สูงสุด)
-   - ตรวจสอบบทบาทแต่ละคน
+   นัดคุย: พี่อ้น + พี่ทอม
+   หารือการแบ่งหน้าที่ support + จัดเรียง access level
 
-2. Architecture & System Design  
-   - นัดคุย: พี่อ้น + พี่ทอม + Dev Team
-   - หารือ Architecture ระบบรวม
-   - ปรึกษา UPOS (FileMaker) integration
+2. Architecture & System Design
+   นัดคุย: พี่อ้น + พี่ทอม + Dev Team
+   หารือ Architecture รวม + UPOS (FileMaker) integration
 
 3. Quarter Update ปลายปี
-   - Action Plan 6 เดือนหลัง (มิ.ย.–พ.ย. 2569)
-   - Resource Planning: DAPP Optimizer → ผลกระทบ SEO + Performance
-   - วิเคราะห์ resource ที่ต้องการ
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-งานที่กำลังดำเนินการ (มิ.ย. 2569)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-• Bolttech iProtec+ UAT V4 — วันนี้
-• FFD Ref Tracker v2 (Email SSO) — 5 มิ.ย.
-• iStudio DAPP — FE + BE Sprint (มิ.ย.–ก.ค.)
-• API Krungsri Gateway + Shopee Pay — planned
+   Action Plan 6 เดือนหลัง (มิ.ย.–พ.ย. 2569)
+   DAPP Optimizer: วิเคราะห์ผลกระทบ SEO + Performance
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -109,38 +137,81 @@ Action Items ครึ่งปีหลัง
 
 Pongpisut M.
 Full Stack Engineer — UFicon</div>
+</div>
 
 <div class="section">
   <h2>Action Items ครึ่งปีหลัง</h2>
-  <div class="action-item"><b>Infrastructure</b> — นัดคุย พี่อ้น + พี่ทอม เรื่อง support + access level (พี่อ้น = highest)</div>
-  <div class="action-item"><b>Architecture</b> — นัดคุย พี่อ้น + พี่ทอม + Dev เรื่อง UPOS/FMP integration</div>
-  <div class="action-item"><b>Quarter Update</b> — 6-month action plan + DAPP optimizer impact on SEO</div>
+  <div class="action-item"><svg width="14" height="14" style="display:inline-block;vertical-align:middle;flex-shrink:0"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg><span><strong>Infrastructure</strong> — นัดคุย พี่อ้น + พี่ทอม เรื่อง support + access level (พี่อ้น = highest)</span></div>
+  <div class="action-item"><svg width="14" height="14" style="display:inline-block;vertical-align:middle;flex-shrink:0"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg><span><strong>Architecture</strong> — นัดคุย พี่อ้น + พี่ทอม + Dev เรื่อง UPOS/FMP integration</span></div>
+  <div class="action-item"><svg width="14" height="14" style="display:inline-block;vertical-align:middle;flex-shrink:0"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg><span><strong>Quarter Update</strong> — 6-month action plan + DAPP optimizer impact on SEO</span></div>
 </div>
 
-<div class="section">
-  <h2>สถานะงาน (มิ.ย. 2569)</h2>
-  <table>
-    <thead><tr><th>งาน</th><th>กำหนด</th><th>สถานะ</th></tr></thead>
-    <tbody>
-      <tr><td>Bolttech V4 UAT</td><td>4 มิ.ย. บ่าย 3</td><td><span class="badge testing">Testing</span></td></tr>
-      <tr><td>FFD Ref Tracker v2 (Email SSO)</td><td>5 มิ.ย.</td><td><span class="badge inprog">In Progress</span></td></tr>
-      <tr><td>iStudio DAPP FE+BE Sprint</td><td>มิ.ย.–ก.ค.</td><td><span class="badge inprog">In Progress</span></td></tr>
-      <tr><td>API Krungsri Gateway</td><td>TBD</td><td><span class="badge planned">Planned</span></td></tr>
-    </tbody>
-  </table>
-</div>
+<p style="font-size:11px;color:#cbd5e1;margin-top:8px">สถานะงานปัจจุบันดูได้ที่ Lark DEV JOBS</p>
 
-<p style="font-size:12px;color:#94a3b8;margin-top:32px">
-  <a href="../">← กลับหน้าหลัก Dev Radar Archive</a>
-</p>
+<a href="../" class="back"><svg width="14" height="14" style="display:inline-block;vertical-align:middle;flex-shrink:0"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19 12H5" />
+  <path d="m12 5 7 7-7 7" />
+</svg> กลับหน้าหลัก Archive</a>
 
 <script>
-function copyEmail() {
-  const text = document.getElementById('emailBody').textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.querySelector('.copy-btn');
-    btn.textContent = '✅ Copied!';
-    setTimeout(() => btn.textContent = '📋 Copy Email Body', 2000);
+function copyEmail(){
+  const text=document.getElementById('emailBody').textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.querySelector('.copy-btn');
+    btn.innerHTML='&#10003; Copied!';
+    setTimeout(()=>btn.innerHTML='<svg width="15" height="15" style="display:inline-block;vertical-align:middle;flex-shrink:0"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+  <rect x="2" y="4" rx="2" />
+</svg> Copy Email Body',2000);
   });
 }
 </script>
