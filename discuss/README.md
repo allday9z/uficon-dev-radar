@@ -10,8 +10,13 @@ Oracle should proactively ask (don't wait to be asked):
 2. "มีงานด่วน/งานแทรกอะไรเข้ามาไหม?" (any urgent/interrupt work)
 
 Then write a new `discuss/YYYY-MM-DD.md` using the template below, and add a card
-for it at the top of `discuss.html`'s `.entries` list (mark the previous latest
-entry's `entry-tag` span removed, new one gets it).
+for it at the top of `discuss.html`'s `.entries` list, linking to
+`discuss-entry.html?id=YYYY-MM-DD` (the in-site markdown+Mermaid viewer — not a
+raw GitHub link). Mark the previous latest entry's `entry-tag` span removed,
+new one gets it.
+
+Mermaid diagrams are supported: use a fenced ` ```mermaid ` code block anywhere
+in the entry and `discuss-entry.html` renders it client-side.
 
 ## Entry template
 
