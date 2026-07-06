@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Discuss ActionPlan · UFicon Dev Radar</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Sarabun',sans-serif;background:#07090f;color:#e2e8f0;min-height:100vh;padding:0 24px 48px}
+.container{max-width:800px;margin:0 auto}
+
+/* Nav */
+.nav{display:flex;align-items:center;justify-content:center;gap:28px;padding:22px 0;margin-bottom:36px;border-bottom:1px solid rgba(255,255,255,.06)}
+.nav a{font-size:12.5px;font-weight:700;letter-spacing:.5px;color:#475569;text-decoration:none;padding:6px 2px;border-bottom:2px solid transparent;transition:all .15s}
+.nav a:hover{color:#a5b4fc}
+.nav a.active{color:#a5b4fc;border-color:#818cf8}
+
+.site-header{text-align:center;margin-bottom:44px}
+.eyebrow{font-size:10px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:#3d4f6a;margin-bottom:14px}
+h1{font-size:42px;font-weight:900;letter-spacing:-1.5px;line-height:1.1}
+h1 span{color:#818cf8}
+.subtitle{font-size:14px;color:#475569;margin-top:14px;line-height:1.6}
+
+.entries{display:flex;flex-direction:column;gap:16px;margin-bottom:44px}
+.entry{background:#0c1220;border:1px solid rgba(99,102,241,.2);border-radius:14px;padding:24px 28px;text-decoration:none;display:block;transition:all .15s}
+.entry:hover{border-color:rgba(129,140,248,.4);background:#0e1526}
+.entry.latest{border-color:rgba(129,140,248,.4);box-shadow:0 0 0 1px rgba(99,102,241,.08)}
+.entry-date{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#22d3ee;margin-bottom:10px}
+.entry-tag{display:inline-block;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:5px;background:rgba(99,102,241,.14);color:#a5b4fc;margin-left:8px;vertical-align:middle}
+.entry h2{font-size:16px;font-weight:700;color:white;margin-bottom:8px}
+.entry p{font-size:13px;color:#64748b;line-height:1.6}
+.entry .arrow{font-size:12px;color:#3d4f6a;margin-top:10px;font-weight:700}
+.entry:hover .arrow{color:#818cf8}
+
+.placeholder{background:rgba(255,255,255,.015);border:1px dashed rgba(255,255,255,.08);border-radius:14px;padding:24px 28px;text-align:center;color:#334155;font-size:13px}
+
+.note{background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.15);border-radius:14px;padding:22px 26px;font-size:13px;color:#64748b;line-height:1.7;margin-bottom:40px}
+.note b{color:#94a3b8}
+
+footer{text-align:center;font-size:12px;color:#1e293b;display:flex;align-items:center;justify-content:center;gap:10px}
+footer a{color:#1e293b;text-decoration:none}
+footer a:hover{color:#475569}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="discuss.html" class="active">Discuss ActionPlan</a>
+    <a href="index.html#archive">Archive</a>
+  </nav>
+
+  <div class="site-header">
+    <div class="eyebrow">UFicon · Internal</div>
+    <h1>Discuss <span>ActionPlan</span></h1>
+    <p class="subtitle">Log รายสัปดาห์ — ทุกวันจันทร์ ถามงานที่ทำเสร็จสัปดาห์ที่แล้ว + งานด่วน/งานแทรก แล้วบันทึกเป็น entry ใหม่</p>
+  </div>
+
+  <div class="entries">
+    <a class="entry latest" href="https://github.com/allday9z/uficon-dev-radar/blob/main/discuss/2026-07-06.md" target="_blank">
+      <div class="entry-date">6 กรกฎาคม 2569<span class="entry-tag">ล่าสุด</span></div>
+      <h2>สัปดาห์ 30 มิ.ย.–6 ก.ค. 2569</h2>
+      <p>DAPP Trade-in เชื่อม API จริง + แก้ PDP/Pages 404 · งานแทรก: Prod outage postmortem, FFD SSO fix, dev-radar Pages 404</p>
+      <div class="arrow">อ่านฉบับเต็มบน GitHub →</div>
+    </a>
+
+    <div class="placeholder">Entry ถัดไปจะถูกเพิ่มวันจันทร์หน้า — ผ่านการถามตอบกับ Oracle</div>
+  </div>
+
+  <div class="note">
+    <b>วิธีทำงานของระบบนี้:</b> ทุกวันจันทร์ 9 โมงเช้า ได้ Telegram เตือนอัตโนมัติ — เมื่อ M2Dev เปิด session กับ Oracle ครั้งถัดไป Oracle จะถามตรงๆ ว่าสัปดาห์ที่ผ่านมาทำอะไรเสร็จบ้าง และมีงานด่วน/งานแทรกอะไรเข้ามา แล้วสรุปเป็น entry ใหม่ในโฟลเดอร์ <code>discuss/</code> ของ repo นี้ (markdown, อ่านเต็มบน GitHub) พร้อมอัปเดต list ในหน้านี้
+  </div>
+
+  <footer>
+    UFicon Dev Team &nbsp;·&nbsp;
+    <a href="https://github.com/allday9z/uficon-dev-radar" target="_blank">GitHub</a>
+  </footer>
+</div>
+</body>
+</html>
