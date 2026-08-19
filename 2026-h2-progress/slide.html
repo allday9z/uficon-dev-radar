@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>UFicon Dev Radar 2026 — H2 Progress</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#060810;--card:#0c1220;--card2:#101828;
+  --a1:#6366f1;--a2:#22d3ee;--a3:#f59e0b;
+  --green:#10b981;--red:#f43f5e;--pink:#ec4899;
+  --text:#e2e8f0;--mid:#94a3b8;--muted:#3d4f6a;
+  --b1:rgba(99,102,241,.14);
+}
+html,body{width:100%;height:100%;background:#dde3ed;overflow:hidden;font-family:'Inter','Sarabun',sans-serif;color:var(--text)}
+body{margin:0;padding:0}
+#deck{width:1280px;height:720px;position:relative;overflow:hidden;border-radius:14px;
+  box-shadow:0 0 0 1px rgba(99,102,241,.22),0 24px 60px rgba(6,8,16,.45)}
+.slide{position:absolute;inset:0;background:var(--bg);display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;transform:translateX(32px);
+  transition:all .3s cubic-bezier(.4,0,.2,1)}
+.slide.active{opacity:1;pointer-events:all;transform:translateX(0)}
+.slide.prev{opacity:0;transform:translateX(-32px)}
+
+.slide::after{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.018) 1px,transparent 1px);
+  background-size:28px 28px;pointer-events:none;z-index:0}
+.slide>*{position:relative;z-index:1}
+
+#controls{display:flex;align-items:center;gap:10px;margin-top:14px;padding:10px 20px;
+  background:rgba(6,8,16,.72);backdrop-filter:blur(12px);border-radius:100px;
+  border:1px solid rgba(99,102,241,.2)}
+.btn{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.1);cursor:pointer;display:flex;align-items:center;
+  justify-content:center;font-size:14px;color:#c8d0e8;transition:all .15s}
+.btn:hover{border-color:var(--a1);color:#a5b4fc;background:rgba(99,102,241,.18)}
+.btn:disabled{opacity:.2;cursor:not-allowed}
+#counter{font-size:11px;color:#8898b8;min-width:50px;text-align:center;font-variant-numeric:tabular-nums;font-family:'JetBrains Mono',monospace}
+#dots{display:flex;gap:4px;flex-wrap:wrap;max-width:400px;justify-content:center}
+.dot{width:5px;height:5px;border-radius:2px;background:rgba(255,255,255,.2);cursor:pointer;transition:all .2s}
+.dot.active{width:16px;background:var(--a1)}
+
+.eyebrow{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--a2)}
+.grad{background:linear-gradient(135deg,#c7d2fe,var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad2{background:linear-gradient(135deg,#fbbf24,#f43f5e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+code{font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(99,102,241,.18);color:#c4b5fd;padding:1px 6px;border-radius:3px}
+
+#s1{
+  background:radial-gradient(ellipse at 10% 50%,rgba(99,102,241,.16) 0%,transparent 55%),
+             radial-gradient(ellipse at 90% 20%,rgba(34,211,238,.1) 0%,transparent 45%),
+             var(--bg);
+  padding:48px 64px;
+}
+.title-layout{display:flex;gap:60px;flex:1;align-items:center}
+.title-left{flex:1.2}
+.title-right{flex:1;display:flex;flex-direction:column;gap:10px}
+.stat-block{background:var(--card);border:1px solid var(--b1);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:14px}
+.stat-block-n{font-size:32px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+.stat-block-info{display:flex;flex-direction:column;gap:2px}
+.stat-block-title{font-size:12px;font-weight:700;color:var(--text)}
+.stat-block-sub{font-size:10px;color:var(--muted)}
+.title-sep{height:1px;background:rgba(99,102,241,.12);margin:6px 0}
+
+#s2{padding:36px 48px 28px}
+.gh-outer{flex:1;display:flex;flex-direction:column;min-height:0;margin-top:10px}
+.gh-month-row{display:flex;margin-left:34px;margin-bottom:5px;gap:4px}
+.gh-mlbl{flex:1;font-size:9px;font-weight:700;color:var(--mid);text-align:center;letter-spacing:.5px}
+.gh-body{display:flex;gap:0}
+.gh-dlbls{display:flex;flex-direction:column;gap:4px;margin-right:6px;padding-top:0px;width:28px}
+.gh-dlbl{height:32px;font-size:9px;font-weight:600;color:var(--muted);display:flex;align-items:center;justify-content:flex-end}
+.gh-grid{display:flex;gap:4px;flex:1}
+.gh-week{display:flex;flex-direction:column;gap:4px;flex:1}
+.gh-cell{height:32px;border-radius:5px;cursor:default;transition:all .12s;position:relative}
+.gh-cell:hover{transform:scale(1.25);z-index:20}
+.c0{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.05)}
+.c1{background:rgba(99,102,241,.28)}
+.c2{background:rgba(99,102,241,.52)}
+.c3{background:rgba(99,102,241,.76)}
+.c4{background:#6366f1;box-shadow:0 0 8px rgba(99,102,241,.55)}
+.c5{background:#818cf8;box-shadow:0 0 12px rgba(129,140,248,.7)}
+.gh-cell.out{background:transparent;border:none}
+
+.act-footer{display:flex;align-items:center;gap:24px;margin-top:12px}
+.act-month-stat{display:flex;flex-direction:column;align-items:center;gap:2px}
+.act-month-n{font-size:16px;font-weight:900;line-height:1}
+.act-month-lbl{font-size:9px;color:var(--muted);font-weight:600}
+
+#s3{padding:36px 48px}
+.week-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;flex:1;margin-top:10px;min-height:0;overflow:hidden}
+.week-card{background:var(--card);border:1px solid var(--b1);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:5px;overflow:hidden}
+.wk-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}
+.wk-label{font-size:9px;font-weight:700;color:var(--a2);letter-spacing:1px;text-transform:uppercase}
+.wk-count{font-size:9px;font-weight:700;background:rgba(99,102,241,.18);color:#a5b4fc;padding:1px 6px;border-radius:100px}
+.wk-item{font-size:9.5px;color:var(--mid);padding:3px 6px;background:rgba(255,255,255,.03);border-radius:4px;border-left:2px solid;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+#s4{padding:36px 48px}
+.kanban{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;flex:1;margin-top:12px;min-height:0}
+.kb-col{display:flex;flex-direction:column;gap:6px;overflow-y:auto}
+.kb-hdr{padding:5px 10px;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:1.5px;text-align:center;text-transform:uppercase;margin-bottom:2px}
+.kb-live{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.2)}
+.kb-prog{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.18)}
+.kb-uat{background:rgba(34,211,238,.12);color:#67e8f9;border:1px solid rgba(34,211,238,.18)}
+.kb-done{background:rgba(99,102,241,.15);color:#818cf8;border:1px solid rgba(99,102,241,.2)}
+.kb-card{background:var(--card);border:1px solid var(--b1);border-radius:8px;padding:8px 10px}
+.kb-title{font-size:11px;font-weight:700;color:var(--text)}
+.kb-sub{font-size:9px;color:var(--muted);margin-top:2px;line-height:1.35}
+.kb-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+.kb-tag{font-size:8.5px;font-weight:600;padding:1px 6px;border-radius:100px;background:rgba(99,102,241,.12);color:#a5b4fc;border:1px solid rgba(99,102,241,.18)}
+
+#s5{padding:36px 48px}
+.bug-layout{display:flex;gap:20px;flex:1;margin-top:12px;min-height:0}
+.bug-bars-col{width:240px;display:flex;flex-direction:column;gap:7px;justify-content:center}
+.b-bar-row{display:flex;align-items:center;gap:6px}
+.b-bar-lbl{font-size:10px;color:var(--mid);width:110px;text-align:right;flex-shrink:0}
+.b-bar-track{flex:1;height:14px;background:rgba(255,255,255,.04);border-radius:100px;overflow:hidden}
+.b-bar-fill{height:100%;border-radius:100px}
+.b-bar-n{font-size:11px;font-weight:800;width:26px;text-align:right;flex-shrink:0}
+.bug-list-col{flex:1;display:flex;flex-direction:column;gap:4px;overflow:hidden}
+.b-row{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--card);border:1px solid var(--b1);border-radius:7px}
+.b-date{font-size:9.5px;font-weight:700;color:var(--muted);width:52px;flex-shrink:0;font-family:'JetBrains Mono',monospace}
+.b-ico{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.b-txt{flex:1;min-width:0}
+.b-title{font-size:11px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.b-detail{font-size:9.5px;color:var(--muted)}
+.b-time{font-size:10px;font-weight:700;padding:2px 7px;border-radius:100px;flex-shrink:0}
+.bt-fast{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.2)}
+.bt-med{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.18)}
+.bt-long{background:rgba(244,63,94,.1);color:#fb7185;border:1px solid rgba(244,63,94,.18)}
+.bt-hero{background:rgba(16,185,129,.25);color:#34d399;border:1px solid rgba(16,185,129,.35)}
+
+.proj-slide{padding:36px 48px}
+.proj-hdr{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.proj-hdr h2{font-size:24px;font-weight:800}
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:100px;font-size:9.5px;font-weight:700}
+.b-live-b{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.25)}
+.b-dev-b{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+.b-done-b{background:rgba(99,102,241,.15);color:#818cf8;border:1px solid rgba(99,102,241,.25)}
+.b-uat-b{background:rgba(34,211,238,.12);color:#67e8f9;border:1px solid rgba(34,211,238,.2)}
+.period{font-size:10px;color:var(--muted);margin-left:auto;font-family:'JetBrains Mono',monospace}
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;flex:1;min-height:0;margin-top:6px}
+.proj-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;flex:1;min-height:0;margin-top:6px}
+.pcard{background:var(--card);border:1px solid var(--b1);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+.pcard-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid)}
+.fl{list-style:none;display:flex;flex-direction:column;gap:5px}
+.fl li{font-size:11.5px;color:var(--mid);padding-left:12px;position:relative;line-height:1.4}
+.fl li::before{content:'▸';position:absolute;left:0;color:var(--a1);font-size:8.5px;top:3px}
+.fl li strong{color:var(--text);font-weight:600}
+.metrics{display:flex;gap:6px}
+.met{flex:1;background:var(--card2);border:1px solid var(--b1);border-radius:8px;padding:8px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.met-n{font-size:20px;font-weight:900;background:linear-gradient(135deg,#fff,var(--a1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;font-variant-numeric:tabular-nums}
+.met-d{font-size:9px;color:var(--muted);text-align:center}
+.pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.pill{padding:2px 7px;border-radius:4px;font-size:9.5px;font-weight:600;background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.18)}
+.flow{display:flex;flex-direction:column;gap:0}
+.fi{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.fi:last-child{border:none}
+.fn{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--a1),var(--a2));
+  display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;flex-shrink:0;margin-top:1px}
+.ft{font-size:11.5px;font-weight:600;color:var(--text)}
+.fd{font-size:10px;color:var(--muted);margin-top:1px}
+.hbox{padding:8px 12px;border-radius:7px;border-left:3px solid}
+.hi{background:rgba(99,102,241,.07);border-color:var(--a1)}
+.hg{background:rgba(16,185,129,.06);border-color:var(--green)}
+.ha{background:rgba(245,158,11,.07);border-color:var(--a3)}
+.hbox p{font-size:11px;color:var(--mid);line-height:1.5}
+.hbox p strong{color:var(--text)}
+.hotfix-row{background:rgba(244,63,94,.05);border:1px solid rgba(244,63,94,.2);border-radius:7px;padding:8px 12px}
+.hotfix-row-title{font-size:10px;font-weight:700;color:#f87171;margin-bottom:4px}
+
+.gant{flex:1;display:flex;flex-direction:column;gap:5px;min-height:0}
+.g-row{display:flex;align-items:center;gap:8px;height:22px}
+.g-lbl{width:130px;font-size:10.5px;color:var(--mid);text-align:right;flex-shrink:0;font-weight:500}
+.g-trk{flex:1;background:rgba(255,255,255,.04);border-radius:100px;height:12px;position:relative;overflow:hidden}
+.g-bar{position:absolute;height:100%;border-radius:100px;top:0;opacity:.75}
+.g-ms{display:flex;margin-top:3px;margin-left:138px}
+.g-m{flex:1;font-size:9px;color:var(--muted);font-weight:700;letter-spacing:.5px;text-align:center}
+
+.tbl{width:100%;border-collapse:collapse;font-size:11px;margin-top:8px}
+.tbl th{padding:6px 8px;text-align:left;font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--b1)}
+.tbl td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--mid);line-height:1.3}
+.tbl td strong{color:var(--text)}
+.tbl tr:hover td{background:rgba(99,102,241,.03)}
+.sdot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:4px}
+.sl{background:#10b981;box-shadow:0 0 4px #10b981}
+.sd2{background:#f59e0b;box-shadow:0 0 4px #f59e0b}
+.sdn{background:#6366f1;box-shadow:0 0 4px #6366f1}
+.su{background:#22d3ee;box-shadow:0 0 4px #22d3ee}
+
+.layer{display:flex;align-items:stretch;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.06);margin-bottom:8px}
+.layer-label{width:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 8px;gap:4px;flex-shrink:0}
+.layer-icon{font-size:22px;line-height:1}
+.layer-name{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;text-align:center}
+.layer-body{flex:1;display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:10px 14px;border-left:1px solid rgba(255,255,255,.05)}
+.ltag{font-size:10px;font-weight:600;padding:3px 9px;border-radius:6px;white-space:nowrap}
+.layer-stat{margin-left:auto;display:flex;flex-direction:column;align-items:center;padding:0 14px;border-left:1px solid rgba(255,255,255,.05);justify-content:center}
+.lstat-n{font-size:22px;font-weight:900;line-height:1}
+.lstat-d{font-size:8px;color:var(--muted);font-weight:700;letter-spacing:.5px}
+
+.pipe{display:flex;align-items:center;gap:0;flex:1;margin:10px 0}
+.pipe-step{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;position:relative}
+.pipe-box{border-radius:8px;padding:8px 6px;text-align:center;border:1px solid;width:100%;min-height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+.pipe-icon{font-size:18px;line-height:1}
+.pipe-name{font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.pipe-detail{font-size:8.5px;color:var(--muted)}
+.pipe-arr{font-size:16px;color:var(--muted);flex-shrink:0;margin:0 -2px;z-index:1;margin-bottom:14px}
+.pipe-time{font-size:8px;font-weight:700;padding:1px 5px;border-radius:100px;margin-top:2px}
+
+.zone{border-radius:10px;border:1px solid;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.zone-title{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
+.node{background:var(--card2);border:1px solid var(--b1);border-radius:8px;padding:7px 10px;display:flex;align-items:center;gap:7px}
+.node-ico{font-size:16px;width:28px;text-align:center;flex-shrink:0}
+.node-txt{flex:1;min-width:0}
+.node-name{font-size:10px;font-weight:700;color:var(--text)}
+.node-sub{font-size:8.5px;color:var(--muted);margin-top:1px}
+.node-badge{font-size:8px;font-weight:700;padding:1px 6px;border-radius:100px;flex-shrink:0}
+.conn{display:flex;align-items:center;gap:6px;padding:3px 0}
+.conn-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(99,102,241,.4),transparent)}
+.conn-label{font-size:8.5px;color:var(--muted);font-weight:600;white-space:nowrap}
+
+.s-close{background:radial-gradient(ellipse at 50% 70%,rgba(99,102,241,.18),transparent 55%),var(--bg);
+  align-items:center;justify-content:center;text-align:center;padding:48px}
+.close-num{font-size:72px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+
+#deck-wrap{display:flex;align-items:center;justify-content:center;
+  width:100vw;position:fixed;top:0;left:0;background:#dde3ed}
+#deck{transform-origin:center center;transition:transform .15s ease;flex-shrink:0}
+#controls{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:50}
+
+:fullscreen body,:-webkit-full-screen body{background:#000}
+:fullscreen #deck-wrap,:-webkit-full-screen #deck-wrap{background:#000}
+:fullscreen #controls,:-webkit-full-screen #controls{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:100}
+
+.interim-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.25);padding:3px 10px;border-radius:100px}
+</style>
+</head>
+<body>
+<div id="deck-wrap">
+<div id="deck">
+
+<!-- ══ S1 TITLE ══ -->
+<div class="slide" id="s1">
+  <div class="title-layout">
+    <div class="title-left">
+      <div class="eyebrow" style="margin-bottom:10px">UFicon · Developer Report · 2026 · H2 (Interim)</div>
+      <div style="font-size:80px;font-weight:900;line-height:.88;letter-spacing:-3px">
+        <span class="grad">Dev</span><br>
+        <span style="color:var(--text)">Radar</span>
+      </div>
+      <div style="margin-top:12px"><span class="interim-tag">⏱ Progress Update — H2 ยังไม่จบ</span></div>
+      <p style="font-size:14px;color:var(--mid);margin-top:14px;line-height:1.7">~2.5 เดือน (มิ.ย.–19 ส.ค.) · 10 projects active · commit ทุกสัปดาห์ไม่มีขาด<br>DAPP/iStudio · UFicon Interview · Bolttech · Trade-in/CompAsia · FFD/Education · +5 อื่นๆ</p>
+      <div style="display:flex;gap:16px;margin-top:18px;padding-top:16px;border-top:1px solid rgba(99,102,241,.12)">
+        <div><div style="font-size:8px;letter-spacing:2px;color:var(--muted);text-transform:uppercase">Developer</div><div style="font-size:13px;font-weight:700;margin-top:2px">Pongpisut M.</div></div>
+        <div><div style="font-size:8px;letter-spacing:2px;color:var(--muted);text-transform:uppercase">Period</div><div style="font-size:13px;font-weight:700;margin-top:2px">มิ.ย.–19 ส.ค. 2569</div></div>
+        <div><div style="font-size:8px;letter-spacing:2px;color:var(--muted);text-transform:uppercase">Report</div><div style="font-size:13px;font-weight:700;margin-top:2px">Interim · Aug 2026</div></div>
+      </div>
+    </div>
+    <div class="title-right">
+      <div class="stat-block"><div class="stat-block-n" style="color:#a5b4fc">64</div><div class="stat-block-info"><div class="stat-block-title">Active Working Days</div><div class="stat-block-sub">จาก 80 วัน (มิ.ย.–19 ส.ค.) = 80%</div></div></div>
+      <div class="stat-block"><div class="stat-block-n" style="color:#67e8f9">10</div><div class="stat-block-info"><div class="stat-block-title">Projects Active/Shipped</div><div class="stat-block-sub">DAPP · Interview · Bolttech · +7 อื่นๆ</div></div></div>
+      <div class="stat-block"><div class="stat-block-n" style="color:#fbbf24">400+</div><div class="stat-block-info"><div class="stat-block-title">Bug Fixes</div><div class="stat-block-sub">DAPP 365 · Interview 30 · Bolttech 10+</div></div></div>
+      <div class="stat-block"><div class="stat-block-n" style="color:#34d399">10</div><div class="stat-block-info"><div class="stat-block-title">Systems Live in Production</div><div class="stat-block-sub">Interview · Bolttech · ACC · U-Meeting · U•Gift · Education · +4</div></div></div>
+      <div class="stat-block"><div class="stat-block-n" style="color:#f87171">10+</div><div class="stat-block-info"><div class="stat-block-title">Production Incidents Resolved</div><div class="stat-block-sub">ทุกครั้ง resolved ภายในวันเดียว</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S2 ACTIVITY GRID ══ -->
+<div class="slide" id="s2" style="background:radial-gradient(ellipse at 80% 30%,rgba(99,102,241,.08),transparent 50%),var(--bg)">
+  <div style="padding:36px 52px;display:flex;flex-direction:column;height:100%">
+    <div class="eyebrow" style="margin-bottom:4px">Work Activity</div>
+    <div style="display:flex;align-items:baseline;gap:16px">
+      <div style="font-size:26px;font-weight:800">ทุกวันที่ทำงาน — มิถุนายน ถึง 19 สิงหาคม 2026</div>
+      <div style="font-size:12px;color:var(--muted)">สีเข้ม = ทำงานหนัก · สีอ่อน = ทำงาน · ขาว = หยุด</div>
+    </div>
+    <div class="gh-outer">
+      <div class="gh-month-row" id="gh-mlbls"></div>
+      <div class="gh-body">
+        <div class="gh-dlbls">
+          <div class="gh-dlbl">Mon</div><div class="gh-dlbl"></div>
+          <div class="gh-dlbl">Wed</div><div class="gh-dlbl"></div>
+          <div class="gh-dlbl">Fri</div><div class="gh-dlbl"></div>
+          <div class="gh-dlbl">Sun</div>
+        </div>
+        <div class="gh-grid" id="gh-grid"></div>
+      </div>
+    </div>
+    <div class="act-footer" id="act-footer">
+      <div style="display:flex;align-items:center;gap:5px">
+        <span style="font-size:9px;color:var(--muted)">น้อย</span>
+        <div class="gh-cell c0" style="width:14px;height:14px;border-radius:3px;position:static"></div>
+        <div class="gh-cell c1" style="width:14px;height:14px;border-radius:3px;position:static"></div>
+        <div class="gh-cell c2" style="width:14px;height:14px;border-radius:3px;position:static"></div>
+        <div class="gh-cell c3" style="width:14px;height:14px;border-radius:3px;position:static"></div>
+        <div class="gh-cell c5" style="width:14px;height:14px;border-radius:3px;position:static"></div>
+        <span style="font-size:9px;color:var(--mid)">มาก</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S3 DELIVERY LOG 1 ══ -->
+<div class="slide" id="s3" style="padding:34px 48px">
+  <div class="eyebrow" style="margin-bottom:4px">Delivery Log — สิ่งที่ทำแต่ละสัปดาห์</div>
+  <div style="font-size:22px;font-weight:800;margin-bottom:10px">Week by Week — มิ.ย. ถึงต้น ก.ค. 2026</div>
+  <div class="week-grid" id="week-grid-1"></div>
+</div>
+
+<!-- ══ S4 DELIVERY LOG 2 ══ -->
+<div class="slide" id="s4" style="padding:34px 48px">
+  <div class="eyebrow" style="margin-bottom:4px">Delivery Log — ต่อ</div>
+  <div style="font-size:22px;font-weight:800;margin-bottom:10px">Week by Week — ก.ค. ถึง 19 ส.ค. 2026</div>
+  <div class="week-grid" id="week-grid-2"></div>
+</div>
+
+<!-- ══ S5 PROJECT STATUS ══ -->
+<div class="slide" id="s5" style="padding:34px 48px">
+  <div class="eyebrow" style="margin-bottom:4px">Project Status</div>
+  <div style="font-size:22px;font-weight:800;margin-bottom:10px">สถานะทุก Project — ปัจจุบัน</div>
+  <div class="kanban">
+    <div class="kb-col">
+      <div class="kb-hdr kb-live">🟢 Production Live</div>
+      <div class="kb-card"><div class="kb-title">UFicon Interview</div><div class="kb-sub">RBAC 18 perms · Gemini AI evaluation · WebAuthn passkey login</div><div class="kb-tags"><span class="kb-tag">TanStack Start</span><span class="kb-tag">Drizzle</span></div></div>
+      <div class="kb-card"><div class="kb-title">Bolttech iProtec+</div><div class="kb-sub">SQLite→Postgres migration · 107-test suite · ops console</div><div class="kb-tags"><span class="kb-tag">Hono/Bun</span><span class="kb-tag">Docker</span></div></div>
+      <div class="kb-card"><div class="kb-title">Apple ACC Service</div><div class="kb-sub">mTLS cert-managed · stable, brief Apple-side outage 18 ส.ค.</div><div class="kb-tags"><span class="kb-tag">Fastify</span></div></div>
+      <div class="kb-card"><div class="kb-title">U-Meeting</div><div class="kb-sub">จองห้อง ABBA/NISSI · steady state, no new bugs</div><div class="kb-tags"><span class="kb-tag">Next.js</span></div></div>
+      <div class="kb-card"><div class="kb-title">U•Gift Coupon</div><div class="kb-sub">Admin/bulk edit · steady state</div><div class="kb-tags"><span class="kb-tag">Filament</span></div></div>
+    </div>
+    <div class="kb-col">
+      <div class="kb-hdr kb-live" style="background:rgba(16,185,129,.1)">🟢 New This Cycle</div>
+      <div class="kb-card"><div class="kb-title">FFD / Education Portal</div><div class="kb-sub">Email SSO ยืนยันตัวตนนักศึกษา · Trade-in (CompAsia) integration</div><div class="kb-tags"><span class="kb-tag">WordPress</span></div></div>
+      <div class="kb-card"><div class="kb-title">HUAWEI Hub LINE Coupon</div><div class="kb-sub">LINE coupon integration · deployed to Coolify</div><div class="kb-tags"><span class="kb-tag">Docker</span></div></div>
+      <div class="kb-card"><div class="kb-title">imedic-webapp</div><div class="kb-sub">Door-to-door medical booking · IMEI + call-first flow</div><div class="kb-tags"><span class="kb-tag">Web</span></div></div>
+      <div class="kb-card"><div class="kb-title">UStore × SWU</div><div class="kb-sub">LINE LIFF coupon mini-app</div><div class="kb-tags"><span class="kb-tag">LIFF</span></div></div>
+      <div class="kb-card"><div class="kb-title">mnt.uficon.com</div><div class="kb-sub">Gamified maintenance microsite · leaderboard + coupon</div><div class="kb-tags"><span class="kb-tag">Node.js</span></div></div>
+    </div>
+    <div class="kb-col">
+      <div class="kb-hdr kb-prog">🟡 In Progress</div>
+      <div class="kb-card"><div class="kb-title">DAPP / iStudio</div><div class="kb-sub">879 commits ใน 2.5 เดือน — checkout, CMS, trade-in, pre-order, search</div><div class="kb-tags"><span class="kb-tag">Next.js 15</span><span class="kb-tag">Laravel 12</span></div></div>
+      <div class="kb-card"><div class="kb-title">uficon-uat-tracker</div><div class="kb-sub">Multi-AI-agent bug tracker · Phase 1 เริ่ม 5 ส.ค.</div><div class="kb-tags"><span class="kb-tag">Turso</span><span class="kb-tag">Vercel</span></div></div>
+    </div>
+    <div class="kb-col">
+      <div class="kb-hdr kb-done">✓ Ongoing / Internal</div>
+      <div class="kb-card"><div class="kb-title">Dev Radar (this repo)</div><div class="kb-sub">Discuss ActionPlan weekly log system built + maintained</div><div class="kb-tags"><span class="kb-tag">Process</span></div></div>
+      <div class="kb-card"><div class="kb-title">Infra / DevOps</div><div class="kb-sub">Capacity incident fixed live, zero downtime · security audit pass</div><div class="kb-tags"><span class="kb-tag">Coolify</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S6 BUG WALL ══ -->
+<div class="slide" id="s6" style="padding:34px 48px">
+  <div class="eyebrow" style="margin-bottom:4px">Bug & Incident Log</div>
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px">
+    <div style="font-size:20px;font-weight:800">400+ Bugs Fixed — 2.5 เดือน</div>
+    <div style="padding:3px 10px;background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.25);border-radius:100px;font-size:10px;font-weight:700">System downtime &lt;1hr ทุกครั้ง</div>
+    <div style="font-size:10px;color:var(--muted);margin-left:auto">รวม critical checkout fix — ลูกค้าสั่งซื้อสำเร็จได้เป็นครั้งแรก</div>
+  </div>
+  <div class="bug-layout" style="gap:14px">
+    <div class="bug-bars-col" style="width:210px">
+      <div style="font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Fixes by Project</div>
+      <div id="bug-bars-el"></div>
+    </div>
+    <div class="bug-list-col">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
+        <div style="font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase">Bug Log — Notable + Production</div>
+        <div style="display:flex;gap:6px;font-size:8px;color:var(--muted)">
+          <span style="padding:1px 5px;background:rgba(16,185,129,.15);color:#34d399;border-radius:3px">เร็ว &lt;1h</span>
+          <span style="padding:1px 5px;background:rgba(245,158,11,.12);color:#fbbf24;border-radius:3px">ปานกลาง</span>
+          <span style="padding:1px 5px;background:rgba(244,63,94,.1);color:#fb7185;border-radius:3px">debug นาน</span>
+        </div>
+      </div>
+      <div id="bug-rows-el" style="display:grid;grid-template-columns:1fr 1fr;gap:3px;overflow:hidden"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S7 DAPP/ISTUDIO ══ -->
+<div class="slide proj-slide" id="s7">
+  <div class="proj-hdr">
+    <h2>DAPP by iStudio by UFicon</h2>
+    <span class="badge b-dev-b">In Progress — Milestone Review</span>
+    <div class="period">www.uficon.com (ใหม่) · มิ.ย.–19 ส.ค.</div>
+  </div>
+  <p style="font-size:11px;color:var(--muted);margin-bottom:8px">หน้าร้าน Apple Premium Partner ใหม่ — เปลี่ยนจาก mock data ทั้งเว็บเป็น API จริง 100%, ระบบเช็คเอาท์ทำงานได้จริงเป็นครั้งแรก</p>
+  <div class="metrics" style="margin-bottom:10px">
+    <div class="met"><div class="met-n">879</div><div class="met-d">Commits</div></div>
+    <div class="met"><div class="met-n">365</div><div class="met-d">Bug fixes</div></div>
+    <div class="met"><div class="met-n">3</div><div class="met-d">Hotfixes prod</div></div>
+    <div class="met"><div class="met-n" style="font-size:14px">2C2P</div><div class="met-d">Payment live</div></div>
+    <div class="met"><div class="met-n" style="font-size:14px">CompAsia</div><div class="met-d">Trade-in live</div></div>
+  </div>
+  <div class="proj-grid">
+    <div class="pcard">
+      <div class="pcard-title">Systems Shipped</div>
+      <ul class="fl">
+        <li><strong>Checkout + 2C2P Payment</strong> — order/payment/webhook pipeline สมบูรณ์เป็นครั้งแรก</li>
+        <li><strong>U•Joy SSO Login</strong> — เบอร์โทร+OTP เชื่อมเช็คเอาท์จริง</li>
+        <li><strong>CMS Platform</strong> — หน้าเว็บทั้งหมดแก้ไขได้จากหลังบ้าน (SSR + SEO)</li>
+        <li><strong>Trade-in (CompAsia)</strong> — เชื่อมจริง end-to-end พร้อม diagnostics quiz</li>
+        <li><strong>AppleCare+ ในตะกร้า</strong> — qty-independent line items</li>
+        <li><strong>Pre-order System</strong> — สร้างครบวงจรในวันเดียว (17 ส.ค.)</li>
+        <li><strong>Search Overhaul</strong> — Apple-style Waterfall Facet Engine</li>
+        <li><strong>Store Locator, FBT, Inventory/BOPIS</strong> — real-time stock ต่อสาขา</li>
+      </ul>
+      <div class="pills"><span class="pill">Next.js 15</span><span class="pill">React 19</span><span class="pill">Laravel 12</span><span class="pill">Filament v5</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div class="hotfix-row">
+        <div class="hotfix-row-title">🔥 Production Hotfixes / Critical Fixes</div>
+        <ul class="fl" style="gap:3px">
+          <li><strong>9 ก.ค.</strong> ระบบเช็คเอาท์ไม่เคยสำเร็จ → แก้ให้สั่งซื้อสำเร็จได้จริงเป็นครั้งแรก</li>
+          <li><strong>4 ส.ค.</strong> PDP มือถือขึ้นหน้าขาวทั้งหน้า (React #310) → แก้วันเดียวกัน</li>
+          <li><strong>UAT #383</strong> ซื้อหลายชิ้นได้ AppleCare+ แค่ 1 ชิ้น → แก้ critical</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="pcard-title">Notable Recent Work (17-19 ส.ค.)</div>
+        <ul class="fl" style="gap:3px">
+          <li>รวม Mac PDP เข้า AddToCartDrawer เดียวกับ iPhone/iPad/Watch</li>
+          <li>รีเฟรชหน้า All-Accessories ครั้งใหญ่ (icon-tile grid, promo card)</li>
+          <li>แก้ checkout order-summary ยาวเกินจอ → เลื่อนในกล่องแทน</li>
+          <li>แก้บั๊กตะกร้าหายหลังเพิ่มสินค้า (session ผูก order เก่า)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S8 UFICON INTERVIEW + BOLTTECH ══ -->
+<div class="slide proj-slide" id="s8">
+  <div style="font-size:22px;font-weight:800;margin-bottom:8px">UFicon Interview · Bolttech iProtec+</div>
+  <div class="proj-grid">
+    <div>
+      <div class="proj-hdr" style="margin-bottom:6px">
+        <span style="font-size:14px;font-weight:700">UFicon Interview</span>
+        <span class="badge b-live-b">Production</span>
+        <div class="period">61 commits · 5 sprint bursts</div>
+      </div>
+      <div class="metrics" style="margin-bottom:8px">
+        <div class="met"><div class="met-n">30</div><div class="met-d">Bugs fixed</div></div>
+        <div class="met"><div class="met-n" style="font-size:13px">Gemini</div><div class="met-d">AI evaluation</div></div>
+        <div class="met"><div class="met-n" style="font-size:13px">WebAuthn</div><div class="met-d">Passkey login</div></div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-title">Shipped This Cycle</div>
+        <ul class="fl" style="gap:3px">
+          <li><strong>Gemini AI candidate evaluation</strong> + WebAuthn passkey login</li>
+          <li>Batch Excel import + email notification, public evaluator view</li>
+          <li>Multi-file resume upload พร้อม gallery preview/delete</li>
+          <li>Position autocomplete + Excel-import preview step</li>
+        </ul>
+        <div class="hotfix-row" style="margin-top:6px">
+          <div class="hotfix-row-title">🚨 Stability Incident — 22-23 ก.ค.</div>
+          <ul class="fl" style="gap:2px">
+            <li>Passkey rollout ทำ browser hang ทุกครั้งที่ login/navigate</li>
+            <li>Root cause: WebAuthn auto-trigger + devtools plugin conflict → แก้ใน ~1 วัน</li>
+          </ul>
+        </div>
+        <div class="pills" style="margin-top:6px"><span class="pill">TanStack Start</span><span class="pill">Drizzle ORM</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="proj-hdr" style="margin-bottom:6px">
+        <span style="font-size:14px;font-weight:700">Bolttech iProtec+</span>
+        <span class="badge b-live-b">Production</span>
+        <div class="period">113 commits · most active side-project</div>
+      </div>
+      <div class="metrics" style="margin-bottom:8px">
+        <div class="met"><div class="met-n">107</div><div class="met-d">Tests (new)</div></div>
+        <div class="met"><div class="met-n" style="font-size:13px">PG</div><div class="met-d">SQLite→Postgres</div></div>
+        <div class="met"><div class="met-n">9</div><div class="met-d">GitHub issues closed</div></div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-title">Turned Into a Real Maintained Product</div>
+        <ul class="fl" style="gap:3px">
+          <li>Migrated datastore SQLite→PostgreSQL ก่อนโหลด UAT/PROD หนักขึ้น</li>
+          <li>Root-caused race conditions: enrol/callback ordering, duplicate contracts, ID collisions</li>
+          <li>Built ops console: contract search, FileMaker resend, 4-panel log viewer, dashboard</li>
+          <li>Keep-a-Changelog + semver + UAT/PROD credential separation</li>
+        </ul>
+        <div class="hotfix-row" style="margin-top:6px">
+          <div class="hotfix-row-title">⚠️ Production Incident — 27 ก.ค.</div>
+          <ul class="fl" style="gap:2px">
+            <li>Vendor ออก PO number ซ้ำให้ลูกค้าคนละคน → ข้อมูล contract ชนกัน</li>
+            <li>กู้คืนด้วยมือ + สร้าง "Self Fix Service" (SFS) เพื่อ track evidence</li>
+          </ul>
+        </div>
+        <div class="pills" style="margin-top:6px"><span class="pill">Hono/Bun</span><span class="pill">PostgreSQL</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S9 FFD/EDUCATION + NEW APPS + INTERNAL TOOLS ══ -->
+<div class="slide proj-slide" id="s9">
+  <div style="font-size:20px;font-weight:800;margin-bottom:8px">FFD / Education · New Apps Shipped · Internal Tooling</div>
+  <div class="proj-grid-3">
+    <div class="pcard">
+      <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px"><span style="font-size:13px;font-weight:700">FFD / Education Portal</span><span class="badge b-live-b">Live</span></div>
+      <p style="font-size:10px;color:var(--muted);margin-bottom:7px">นักศึกษา/อาจารย์ยืนยันตัวตนซื้อ Apple ราคา Education</p>
+      <ul class="fl" style="gap:3px">
+        <li><strong>Email SSO flow</strong> — verify domain สถาบันอัตโนมัติ</li>
+        <li><strong>Trade-in (CompAsia)</strong> — pipeline เต็มรูปแบบ ผูกกับ PDP</li>
+        <li>Hotfix: stale container 25 ชม. (14 ก.ค.), KBank webhook race</li>
+      </ul>
+      <div class="pills"><span class="pill">WordPress</span><span class="pill">Email SSO</span></div>
+    </div>
+    <div class="pcard">
+      <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px"><span style="font-size:13px;font-weight:700">New Apps Shipped</span><span class="badge b-done-b">Live</span></div>
+      <p style="font-size:10px;color:var(--muted);margin-bottom:7px">4 แอปใหม่ deploy จริงในรอบนี้</p>
+      <ul class="fl" style="gap:3px">
+        <li><strong>HUAWEI Hub LINE Coupon</strong> — deploy ใหม่บน Coolify</li>
+        <li><strong>imedic-webapp</strong> — จองหมอถึงบ้าน (IMEI + call-first)</li>
+        <li><strong>UStore × SWU</strong> — LINE LIFF coupon mini-app</li>
+        <li><strong>mnt.uficon.com</strong> — mini-game + leaderboard + coupon</li>
+      </ul>
+      <div class="pills"><span class="pill">LINE LIFF</span><span class="pill">Node.js</span></div>
+    </div>
+    <div class="pcard">
+      <div style="margin-bottom:6px;font-size:13px;font-weight:700">Internal Tooling + Process</div>
+      <ul class="fl" style="gap:3px">
+        <li><strong>uficon-uat-tracker</strong> — multi-AI-agent bug tracker, REST protocol, Phase 1 เริ่ม 5 ส.ค.</li>
+        <li><strong>Dev Radar / Discuss ActionPlan</strong> — weekly retrospective log ที่ทำอยู่นี้เอง</li>
+        <li><strong>Lark PM backfill</strong> — 29 tasks ย้อนหลังเข้า DEV JOBS board</li>
+        <li><strong>Security audit</strong> — 17 repos flip เป็น private, credentials → Secrets</li>
+        <li><strong>Milestone Review Audit</strong> — ตรวจ Gantt vs code จริงก่อน Apple review</li>
+      </ul>
+      <div class="pills"><span class="pill">Turso</span><span class="pill">Vercel</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S10 GANTT + TABLE ══ -->
+<div class="slide" style="padding:34px 48px" id="s10">
+  <div class="eyebrow" style="margin-bottom:4px">Timeline + Summary</div>
+  <div style="font-size:20px;font-weight:800;margin-bottom:8px">Project Gantt + Dashboard</div>
+  <div style="display:flex;gap:20px;flex:1;min-height:0">
+    <div style="width:380px;flex-shrink:0;display:flex;flex-direction:column">
+      <div style="font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Timeline</div>
+      <div class="g-ms" id="g-ms"></div>
+      <div class="gant" id="g-wrap"></div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;min-height:0">
+      <div style="font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">All Projects</div>
+      <table class="tbl">
+        <thead><tr><th>Project</th><th>งานหลัก</th><th>ใครใช้</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>DAPP/iStudio</strong></td><td>Checkout, CMS, Trade-in, Pre-order</td><td>ลูกค้า UFicon</td><td><span class="sdot sd2"></span>Building</td></tr>
+          <tr><td><strong>UFicon Interview</strong></td><td>Gemini AI eval, WebAuthn</td><td>HR UFicon</td><td><span class="sdot sl"></span>Live</td></tr>
+          <tr><td><strong>Bolttech iProtec+</strong></td><td>PG migration, 107 tests, ops console</td><td>ลูกค้า Apple</td><td><span class="sdot sl"></span>Live</td></tr>
+          <tr><td><strong>FFD/Education</strong></td><td>Email SSO, Trade-in CompAsia</td><td>นักศึกษา/อาจารย์</td><td><span class="sdot sl"></span>Live</td></tr>
+          <tr><td><strong>Apple ACC</strong></td><td>AppleCare+ API, stable</td><td>Sales UFicon</td><td><span class="sdot sl"></span>Live</td></tr>
+          <tr><td><strong>U-Meeting / U•Gift</strong></td><td>Steady state, no new bugs</td><td>พนักงาน/Admin</td><td><span class="sdot sl"></span>Live</td></tr>
+          <tr><td><strong>HUAWEI Hub / imedic / UStore / mnt</strong></td><td>4 new apps shipped</td><td>ลูกค้าปลายทาง</td><td><span class="sdot sl"></span>Live</td></tr>
+          <tr><td><strong>uficon-uat-tracker</strong></td><td>Multi-agent bug tracker</td><td>Dev + AI agents</td><td><span class="sdot sd2"></span>Phase 1</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S11 CLOSING ══ -->
+<div class="slide s-close" id="s11">
+  <div class="eyebrow" style="margin-bottom:12px">UFicon · Developer · มิ.ย.–19 ส.ค. 2026 (Interim)</div>
+  <div class="close-num"><span class="grad">64</span></div>
+  <div style="font-size:18px;color:var(--mid);margin-top:4px">วันที่ทำงานใน 80 วัน (80%)</div>
+  <div style="display:flex;gap:20px;margin-top:28px">
+    <div style="text-align:center;padding:16px 28px;background:var(--card);border:1px solid var(--b1);border-radius:10px">
+      <div style="font-size:36px;font-weight:900;color:#a5b4fc">10</div><div style="font-size:10px;color:var(--muted)">Projects</div>
+    </div>
+    <div style="text-align:center;padding:16px 28px;background:var(--card);border:1px solid var(--b1);border-radius:10px">
+      <div style="font-size:36px;font-weight:900;color:#fbbf24">400+</div><div style="font-size:10px;color:var(--muted)">Bugs Fixed</div>
+    </div>
+    <div style="text-align:center;padding:16px 28px;background:var(--card);border:1px solid var(--b1);border-radius:10px">
+      <div style="font-size:36px;font-weight:900;color:#34d399">10</div><div style="font-size:10px;color:var(--muted)">Systems Live</div>
+    </div>
+    <div style="text-align:center;padding:16px 28px;background:var(--card);border:1px solid var(--b1);border-radius:10px">
+      <div style="font-size:36px;font-weight:900;color:#f87171">10+</div><div style="font-size:10px;color:var(--muted)">Incidents Resolved</div>
+    </div>
+  </div>
+  <div style="margin-top:22px"><span class="interim-tag">รายงานฉบับเต็ม H2 (มิ.ย.–ธ.ค.) จะออกปลายปี</span></div>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;justify-content:center;max-width:700px">
+    <span style="padding:3px 9px;border-radius:4px;font-size:10px;background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)">Next.js 15</span>
+    <span style="padding:3px 9px;border-radius:4px;font-size:10px;background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)">Laravel 12</span>
+    <span style="padding:3px 9px;border-radius:4px;font-size:10px;background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)">2C2P Payment</span>
+    <span style="padding:3px 9px;border-radius:4px;font-size:10px;background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)">TanStack Start</span>
+    <span style="padding:3px 9px;border-radius:4px;font-size:10px;background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)">Gemini AI</span>
+    <span style="padding:3px 9px;border-radius:4px;font-size:10px;background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)">WebAuthn</span>
+    <span style="padding:3px 9px;border-radius:4px;font-size:10px;background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)">Hono/Bun</span>
+    <span style="padding:3px 9px;border-radius:4px;font-size:10px;background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)">Docker/Coolify</span>
+    <span style="padding:3px 9px;border-radius:4px;font-size:10px;background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)">Turso/Vercel</span>
+  </div>
+</div>
+
+</div>
+</div>
+
+<div id="controls">
+  <button class="btn" id="prevBtn" onclick="go(-1)" title="Previous (←)">◀</button>
+  <div id="dots"></div>
+  <button class="btn" id="nextBtn" onclick="go(1)" title="Next (→)">▶</button>
+  <div id="counter">1 / 11</div>
+  <div style="width:1px;height:20px;background:rgba(255,255,255,.15);margin:0 4px"></div>
+  <button class="btn" id="fsBtn" onclick="toggleFS()" title="Fullscreen (F)" style="font-size:16px">⛶</button>
+</div>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────────────────────
+const act={
+  '2026-06-04':11,'2026-06-05':18,'2026-06-08':5,'2026-06-09':5,'2026-06-10':49,'2026-06-11':46,'2026-06-15':4,
+  '2026-06-16':6,'2026-06-17':6,'2026-06-18':27,'2026-06-19':28,'2026-06-22':15,'2026-06-23':9,'2026-06-24':4,
+  '2026-06-25':17,'2026-06-26':39,'2026-06-27':4,'2026-06-28':3,'2026-06-29':27,'2026-06-30':7,'2026-07-01':4,
+  '2026-07-02':16,'2026-07-03':6,'2026-07-06':23,'2026-07-07':29,'2026-07-08':50,'2026-07-09':46,'2026-07-10':8,
+  '2026-07-13':5,'2026-07-14':6,'2026-07-15':3,'2026-07-16':10,'2026-07-17':4,'2026-07-18':1,'2026-07-20':20,
+  '2026-07-21':8,'2026-07-22':17,'2026-07-23':17,'2026-07-24':3,'2026-07-25':7,'2026-07-26':4,'2026-07-27':18,
+  '2026-07-28':32,'2026-07-29':45,'2026-07-31':14,'2026-08-01':11,'2026-08-02':4,'2026-08-03':30,'2026-08-04':18,
+  '2026-08-05':10,'2026-08-06':15,'2026-08-07':23,'2026-08-08':19,'2026-08-09':19,'2026-08-10':36,'2026-08-11':18,
+  '2026-08-12':3,'2026-08-13':9,'2026-08-14':40,'2026-08-15':9,'2026-08-16':2,'2026-08-17':52,'2026-08-18':8,
+  '2026-08-19':2
+};
+function fk(d){return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function gc(n){return n===0?'c0':n<=8?'c1':n<=18?'c2':n<=28?'c3':n<=40?'c4':'c5'}
+
+// ── GITHUB GRID (S2) ─────────────────────────────────────────────────────────
+const ghS=new Date(2026,5,1); // Mon Jun 1 (already a Monday)
+const ghE=new Date(2026,7,19); // Wed Aug 19
+const weeks=[];
+let cur=new Date(ghS);
+while(cur<=ghE){
+  const w=[];
+  for(let i=0;i<7;i++){
+    const k=fk(cur);
+    const inR=cur>=ghS&&cur<=ghE;
+    w.push({k,v:act[k]||0,inR,m:cur.getMonth(),d:cur.getDate()});
+    cur.setDate(cur.getDate()+1);
+  }
+  weeks.push(w);
+}
+const mlRow=document.getElementById('gh-mlbls');
+const mNames=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'];
+let prevM=-1;
+weeks.forEach((w)=>{
+  const el=document.createElement('div');
+  el.className='gh-mlbl';
+  let lbl='';
+  if(w[0].inR){
+    const m=w[0].m;
+    if(m!==prevM&&(w[0].d<=7)){lbl=mNames[m];prevM=m}
+  }
+  el.textContent=lbl;
+  mlRow.appendChild(el);
+});
+const grid=document.getElementById('gh-grid');
+weeks.forEach(w=>{
+  const col=document.createElement('div');
+  col.className='gh-week';
+  w.forEach(cell=>{
+    const el=document.createElement('div');
+    el.className='gh-cell '+(cell.inR?gc(cell.v):'out');
+    if(cell.inR&&cell.v>0)el.title=`${cell.k}: ${cell.v} commits`;
+    col.appendChild(el);
+  });
+  grid.appendChild(col);
+});
+const footer=document.getElementById('act-footer');
+const mStats=[
+  {m:'มิ.ย.',d:20,c:'#a5b4fc'},{m:'ก.ค.',d:25,c:'#67e8f9'},{m:'ส.ค. (ถึง19)',d:19,c:'#fbbf24'},
+];
+footer.innerHTML=`<div style="display:flex;align-items:center;gap:5px">
+  <span style="font-size:9px;color:var(--muted)">น้อย</span>
+  ${['c0','c1','c2','c3','c5'].map(c=>`<div class="gh-cell ${c}" style="width:13px;height:13px;border-radius:3px;position:static"></div>`).join('')}
+  <span style="font-size:9px;color:var(--mid)">มาก</span>
+</div>`;
+mStats.forEach(({m,d,c})=>{
+  const el=document.createElement('div');
+  el.className='act-month-stat';
+  el.innerHTML=`<div class="act-month-n" style="color:${c}">${d}</div><div class="act-month-lbl">${m}</div>`;
+  footer.appendChild(el);
+});
+footer.innerHTML+=`<div style="margin-left:auto;font-size:11px;font-weight:700;color:var(--mid)">Total: <span style="color:var(--a1)">64</span> active days / 80 days</div>`;
+
+// ── DELIVERY LOG (S3 + S4) ────────────────────────────────────────────────────
+const weeks_data=[
+  {wk:'W1 · 1–7 มิ.ย.',color:'#a5b4fc',items:['Deploy pipeline ขึ้น Coolify (Docker/nginx/php-fpm)','เริ่มโครง PDP dynamic routing','หน้าบัญชีผู้ใช้ + ปุ่มแชร์สินค้า']},
+  {wk:'W2 · 8–14 มิ.ย.',color:'#a5b4fc',items:['เปลี่ยนทั้งเว็บจาก mock เป็น API จริงทั้งหมด','ระบบ PDP อัจฉริยะ: แยกเทมเพลตอัตโนมัติ','ค้นหาแบบ real-time + Badge สถานะสินค้า','วางระบบ multi-environment dev/staging/prod','UFicon Interview: schedule MVP เริ่มสร้าง']},
+  {wk:'W3 · 15–21 มิ.ย.',color:'#a5b4fc',items:['ระบบ Compare (เปรียบเทียบรุ่น) เปิดตัว','ระบบ Inventory/BOPIS real-time ต่อสาขา (SSE)','Redis cache + DB index 9 ตัว, PHP 8.2→8.4']},
+  {wk:'W4 · 22–28 มิ.ย.',color:'#818cf8',items:['Login/สมัครสมาชิกผ่าน U•Joy SSO (เบอร์โทร+OTP)','ระบบ CMS จัดการหน้าเว็บ (SSR+SEO, 3 โหมดแก้ไข)','เริ่มเชื่อม 2C2P + AppleCare ในตะกร้า','Bolttech: UAT dataset overhaul + Mock Mode']},
+  {wk:'W5 · 29 มิ.ย.–5 ก.ค.',color:'#818cf8',items:['แก้บั๊กเช็คเอาท์: ราคา/จำนวน NaN, ปุ่มพาไป login ผิดคน','ระบบ Media Library กลาง + CKEditor','Swarm CD auto-deploy + database backup ครั้งแรก','Bolttech: FileMaker integration สำหรับทีมภายนอก']},
+  {wk:'W6 · 6–12 ก.ค. (สัปดาห์ใหญ่ที่สุด)',color:'#67e8f9',items:['🔥 แก้บั๊กร้ายแรง: checkout ไม่เคยสำเร็จ → สั่งซื้อสำเร็จครั้งแรก','เชื่อมหน้าแรกทั้งหน้าเข้า CMS จริงเลิก mock data','Trade-in เชื่อม CompAsia จริง + RBAC แอดมิน','uficon.com: PHP-FPM reload outage 2 นาที (self-hotfix)']},
+];
+const weeks_data2=[
+  {wk:'W7 · 13–19 ก.ค.',color:'#67e8f9',items:['ระบบ Notify Me (แจ้งเตือนสินค้ากลับมามีสต็อก)','Trade-in ครบ 12 endpoint production','Checkout Hardening Marathon — 13 bugs จริงแก้หมด','UFicon Interview: RBAC/scoring/analytics เพิ่ม']},
+  {wk:'W8 · 20–26 ก.ค.',color:'#fbbf24',items:['อีเมลอัตโนมัติครบ: จัดส่งแล้ว/สำเร็จ/ตะกร้าทิ้งไว้','BOPIS Booking Slot + Gemini AI แนะนำสินค้า','แก้ XSS + race condition คืนสต็อก','Milestone Review Audit: ตรวจ Gantt vs code จริง']},
+  {wk:'W9 · 27 ก.ค.–2 ส.ค.',color:'#fbbf24',items:['หน้า Group Collections ใหม่ (Filter Grid ครบ)','GA4 E-Commerce tracking ครบวงจร','FBT auto-generation จากกฎ catalog','UFicon Interview: WebAuthn incident แก้ใน 1 วัน','Bolttech: production incident PO ซ้ำ → SFS process']},
+  {wk:'W10 · 3–9 ส.ค.',color:'#f59e0b',items:['🔥 Hotfix ฉุกเฉิน: PDP มือถือหน้าขาว (React #310)','🔥 แก้บั๊ก CRITICAL: AppleCare+ หลายชิ้นได้แค่ 1','Store Locator ปรับปรุงใหม่ทั้งหมด','uficon-uat-tracker: kickoff Phase 1 (5 ส.ค.)']},
+  {wk:'W11 · 10–16 ส.ค.',color:'#34d399',items:['เชื่อมหน้าค้นหาเข้า API จริงทั้งหมด (facet, แบ่งหน้า)','ระบบผ่อนชำระ tier + Newsletter จริง','รวม nav/footer/settings เป็น API เดียว (เร็วขึ้น)','Infra: capacity incident แก้ live ไม่มี downtime']},
+  {wk:'W12 · 17–19 ส.ค.',color:'#34d399',items:['🚀 เปิดตัวระบบพรีออเดอร์ครบวงจรในวันเดียว','รวม Mac PDP เข้า AddToCartDrawer เดียวกัน','รีเฟรช All-Accessories ครั้งใหญ่','แก้ checkout order-summary เลื่อนในกล่องแทน']},
+];
+function buildWeekGrid(el, data){
+  data.forEach(({wk,color,items})=>{
+    const card=document.createElement('div');
+    card.className='week-card';
+    const borderColor=color+'55';
+    card.style.borderColor=borderColor;
+    card.innerHTML=`<div class="wk-hdr"><div class="wk-label" style="color:${color}">${wk}</div><div class="wk-count">${items.length}</div></div>`;
+    items.forEach(item=>{
+      const d=document.createElement('div');
+      d.className='wk-item';
+      const isHot=item.includes('fix')||item.includes('Fix')||item.includes('hotfix')||item.includes('🔥')||item.includes('incident');
+      d.style.borderLeftColor=isHot?'#f43f5e':color;
+      d.style.color=isHot?'#fca5a5':'';
+      d.textContent=item;
+      card.appendChild(d);
+    });
+    el.appendChild(card);
+  });
+}
+buildWeekGrid(document.getElementById('week-grid-1'),weeks_data);
+buildWeekGrid(document.getElementById('week-grid-2'),weeks_data2);
+
+// ── BUG BARS (S6) ─────────────────────────────────────────────────────────────
+const bugD=[
+  {l:'DAPP/iStudio',n:365,c:'#f59e0b'},
+  {l:'UFicon Interview',n:30,c:'#a78bfa'},
+  {l:'Bolttech',n:15,c:'#22d3ee'},
+  {l:'FFD/Education',n:8,c:'#10b981'},
+  {l:'uficon.com (WP)',n:5,c:'#818cf8'},
+  {l:'Apple ACC',n:2,c:'#f43f5e'},
+];
+const bEl=document.getElementById('bug-bars-el');
+const bugMaxSqrt=Math.sqrt(Math.max(...bugD.map(b=>b.n)));
+bugD.forEach(({l,n,c})=>{
+  const pct=Math.max((Math.sqrt(n)/bugMaxSqrt)*100,6);
+  bEl.innerHTML+=`<div class="b-bar-row">
+    <div class="b-bar-lbl">${l}</div>
+    <div class="b-bar-track"><div class="b-bar-fill" style="width:${pct}%;background:${c};opacity:.75"></div></div>
+    <div class="b-bar-n" style="color:${c}">${n}</div>
+  </div>`;
+});
+
+const bugRows=[
+  {d:'9 ก.ค.',ico:'🛒',bg:'rgba(244,63,94,.2)',t:'Checkout ไม่เคยสำเร็จเลย',s:'order status, stock race, webhook',time:'hero',tt:'✅ยิ่งใหญ่'},
+  {d:'4 ส.ค.',ico:'📱',bg:'rgba(244,63,94,.12)',t:'PDP มือถือหน้าขาว (React #310)',s:'hotfix production วันเดียวกัน',time:'fast',tt:'<1h'},
+  {d:'UAT#383',ico:'🍎',bg:'rgba(245,158,11,.12)',t:'AppleCare+ หลายชิ้นได้แค่ 1',s:'critical bug จาก UAT',time:'fast',tt:'<1h'},
+  {d:'22 ก.ค.',ico:'🔐',bg:'rgba(99,102,241,.15)',t:'Interview: WebAuthn browser hang',s:'devtools plugin conflict',time:'long',tt:'~1 วัน'},
+  {d:'27 ก.ค.',ico:'🚨',bg:'rgba(244,63,94,.15)',t:'Bolttech: PO ซ้ำ ข้อมูลชนกัน',s:'vendor duplicate key → SFS process',time:'med',tt:'2h+'},
+  {d:'14 ก.ค.',ico:'🏫',bg:'rgba(16,185,129,.12)',t:'FFD Portal หยุดทำงาน 25 ชม.',s:'stale container image',time:'fast',tt:'<1h'},
+  {d:'2 ก.ค.',ico:'🌐',bg:'rgba(99,102,241,.1)',t:'uficon.com production outage',s:'PHP-FPM reload signal ผิด image',time:'hero',tt:'~2 นาที'},
+  {d:'14 ก.ค.',ico:'💳',bg:'rgba(244,63,94,.15)',t:'sprintf() crash 4 payment gateways',s:'legacy WooCommerce store',time:'fast',tt:'<1h'},
+  {d:'18 ส.ค.',ico:'🍏',bg:'rgba(245,158,11,.1)',t:'Apple ACC: outage ฝั่ง Apple เอง',s:'ไม่ใช่บั๊กเรา — แจ้งลูกค้าแล้ว',time:'med',tt:'monitored'},
+  {d:'20 ก.ค.',ico:'🔍',bg:'rgba(99,102,241,.1)',t:'Milestone Audit พบ 13 bugs ไม่มี test',s:'checkout coverage gap ระบุแล้ว',time:'long',tt:'audit'},
+  {d:'20-26ก.ค.',ico:'🛡️',bg:'rgba(16,185,129,.12)',t:'XSS + race condition คืนสต็อก',s:'security hardening pass',time:'med',tt:'2h'},
+  {d:'10 ส.ค.',ico:'💾',bg:'rgba(16,185,129,.1)',t:'Coolify host disk 81-86%',s:'LVM cap mismatch — แก้ live ไม่ down',time:'fast',tt:'<1h'},
+  {d:'ส.ค.',ico:'🎨',bg:'rgba(244,63,94,.1)',t:'CSS selector พังทุกหน้าเว็บ',s:'global style change — hotfix ด่วน',time:'fast',tt:'<1h'},
+  {d:'ก.ค.',ico:'🔗',bg:'rgba(34,211,238,.1)',t:'Compare Shadow DOM ข้าม script ไม่ได้',s:'ลอง+revert → เปลี่ยนวิธีเป็น iframe',time:'med',tt:'2h'},
+  {d:'+380',ico:'📦',bg:'rgba(99,102,241,.08)',t:'ที่เหลืออีก 380+ bugs',s:'component, infra, api, checkout bugs',time:'',tt:'all ✅'},
+];
+const rowsEl=document.getElementById('bug-rows-el');
+const half=Math.ceil(bugRows.length/2);
+[bugRows.slice(0,half),bugRows.slice(half)].forEach(colRows=>{
+  const col=document.createElement('div');
+  col.style.cssText='display:flex;flex-direction:column;gap:3px';
+  colRows.forEach(r=>{
+    const row=document.createElement('div');
+    row.className='b-row';
+    row.style.padding='5px 8px';
+    const timeClass=r.time?('bt-'+r.time):'';
+    const timeStyle=r.time?'':'background:rgba(99,102,241,.1);color:#818cf8;border:1px solid rgba(99,102,241,.2)';
+    row.innerHTML=`<div class="b-date" style="width:48px;font-size:8.5px">${r.d}</div><div class="b-ico" style="width:18px;height:18px;font-size:9px;background:${r.bg}">${r.ico}</div><div class="b-txt"><div class="b-title" style="font-size:10px">${r.t}</div><div class="b-detail" style="font-size:8px">${r.s}</div></div><div class="b-time ${timeClass}" style="font-size:9px;padding:1px 5px;${timeStyle}">${r.tt}</div>`;
+    col.appendChild(row);
+  });
+  rowsEl.appendChild(col);
+});
+
+// ── GANTT (S10) ───────────────────────────────────────────────────────────────
+const gProj=[
+  {n:'DAPP/iStudio',s:'2026-06-01',e:'2026-08-19',c:'#f59e0b'},
+  {n:'UFicon Interview',s:'2026-06-04',e:'2026-08-06',c:'#a78bfa'},
+  {n:'Bolttech',s:'2026-06-04',e:'2026-08-03',c:'#22d3ee'},
+  {n:'FFD/Education',s:'2026-06-08',e:'2026-07-20',c:'#10b981'},
+  {n:'HUAWEI/imedic/UStore/mnt',s:'2026-07-22',e:'2026-08-12',c:'#818cf8'},
+  {n:'uat-tracker',s:'2026-08-05',e:'2026-08-19',c:'#f43f5e'},
+];
+const gStart=new Date(2026,5,1), gEnd=new Date(2026,7,19);
+const totalDays=(gEnd-gStart)/86400000;
+const gMs=document.getElementById('g-ms');
+['มิ.ย.','ก.ค.','ส.ค.'].forEach(m=>{const el=document.createElement('div');el.className='g-m';el.textContent=m;gMs.appendChild(el)});
+const gWrap=document.getElementById('g-wrap');
+gProj.forEach(p=>{
+  const s=new Date(p.s), e=new Date(p.e);
+  const left=((s-gStart)/86400000/totalDays)*100;
+  const width=((e-s)/86400000/totalDays)*100;
+  const row=document.createElement('div');
+  row.className='g-row';
+  row.innerHTML=`<div class="g-lbl">${p.n}</div><div class="g-trk"><div class="g-bar" style="left:${left}%;width:${Math.max(width,2)}%;background:${p.c}"></div></div>`;
+  gWrap.appendChild(row);
+});
+
+// ── DECK ENGINE ────────────────────────────────────────────────────────────────
+const TOTAL=document.querySelectorAll('.slide').length;
+let cur2=1;
+const dotsEl=document.getElementById('dots');
+for(let i=1;i<=TOTAL;i++){
+  const d=document.createElement('div');
+  d.className='dot'+(i===1?' active':'');
+  d.onclick=()=>goTo(i);
+  dotsEl.appendChild(d);
+}
+function goTo(n){
+  cur2=Math.max(1,Math.min(TOTAL,n));
+  document.querySelectorAll('.slide').forEach((s,i)=>{
+    s.classList.remove('active','prev');
+    if(i+1===cur2)s.classList.add('active');
+    else if(i+1<cur2)s.classList.add('prev');
+  });
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===cur2));
+  document.getElementById('counter').textContent=`${cur2} / ${TOTAL}`;
+  document.getElementById('prevBtn').disabled=cur2===1;
+  document.getElementById('nextBtn').disabled=cur2===TOTAL;
+}
+function go(dir){goTo(cur2+dir)}
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();go(1)}
+  if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();go(-1)}
+  if(e.key==='f'||e.key==='F'){toggleFS()}
+  if(e.key==='Escape'&&document.fullscreenElement){document.exitFullscreen()}
+});
+goTo(1);
+
+// ── SCALE ──────────────────────────────────────────────────────────────────────
+const deck=document.getElementById('deck');
+const wrap=document.getElementById('deck-wrap');
+const ctrl=document.getElementById('controls');
+
+function scaleDeck(){
+  const W=1280,H=720;
+  const avW=window.innerWidth,avH=window.innerHeight;
+  const isFS=!!document.fullscreenElement;
+  const ctrlH=isFS?0:58;
+  const scale=Math.min(avW/W,(avH-ctrlH)/H);
+  deck.style.transform=`scale(${scale})`;
+  if(isFS){
+    wrap.style.height='100vh';
+    ctrl.style.display='none';
+  } else {
+    wrap.style.height=(H*scale)+'px';
+    ctrl.style.display='flex';
+  }
+}
+window.addEventListener('resize',scaleDeck);
+document.addEventListener('fullscreenchange',()=>{
+  const btn=document.getElementById('fsBtn');
+  if(btn)btn.textContent=document.fullscreenElement?'⛶':'⛶';
+  scaleDeck();
+});
+function toggleFS(){
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen().catch(()=>{});
+  } else {
+    document.exitFullscreen();
+  }
+}
+scaleDeck();
+</script>
+
+</body>
+</html>
