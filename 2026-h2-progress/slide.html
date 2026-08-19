@@ -258,7 +258,7 @@ code{font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(99,10
       </div>
     </div>
     <div class="title-right">
-      <div class="stat-block"><div class="stat-block-n" style="color:#a5b4fc">64</div><div class="stat-block-info"><div class="stat-block-title">Active Working Days</div><div class="stat-block-sub">จาก 80 วัน (มิ.ย.–19 ส.ค.) = 80%</div></div></div>
+      <div class="stat-block"><div class="stat-block-n" style="color:#a5b4fc">1,054</div><div class="stat-block-info"><div class="stat-block-title">Total Commits</div><div class="stat-block-sub">มิ.ย.–19 ส.ค. 2569 · ทุก repo</div></div></div>
       <div class="stat-block"><div class="stat-block-n" style="color:#67e8f9">10</div><div class="stat-block-info"><div class="stat-block-title">Projects Active/Shipped</div><div class="stat-block-sub">DAPP · Interview · Bolttech · +7 อื่นๆ</div></div></div>
       <div class="stat-block"><div class="stat-block-n" style="color:#fbbf24">400+</div><div class="stat-block-info"><div class="stat-block-title">Bug Fixes</div><div class="stat-block-sub">DAPP 365 · Interview 30 · Bolttech 10+</div></div></div>
       <div class="stat-block"><div class="stat-block-n" style="color:#34d399">10</div><div class="stat-block-info"><div class="stat-block-title">Systems Live in Production</div><div class="stat-block-sub">Interview · Bolttech · ACC · U-Meeting · U•Gift · Education · +4</div></div></div>
@@ -270,10 +270,10 @@ code{font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(99,10
 <!-- ══ S2 ACTIVITY GRID ══ -->
 <div class="slide" id="s2" style="background:radial-gradient(ellipse at 80% 30%,rgba(99,102,241,.08),transparent 50%),var(--bg)">
   <div style="padding:36px 52px;display:flex;flex-direction:column;height:100%">
-    <div class="eyebrow" style="margin-bottom:4px">Work Activity</div>
+    <div class="eyebrow" style="margin-bottom:4px">Commit Activity</div>
     <div style="display:flex;align-items:baseline;gap:16px">
-      <div style="font-size:26px;font-weight:800">ทุกวันที่ทำงาน — มิถุนายน ถึง 19 สิงหาคม 2026</div>
-      <div style="font-size:12px;color:var(--muted)">สีเข้ม = ทำงานหนัก · สีอ่อน = ทำงาน · ขาว = หยุด</div>
+      <div style="font-size:26px;font-weight:800">ความถี่ของ Commit — มิถุนายน ถึง 19 สิงหาคม 2026</div>
+      <div style="font-size:12px;color:var(--muted)">สีเข้ม = commit เยอะ · สีอ่อน = commit น้อย · ขาว = ไม่มี commit วันนั้น (ไม่ได้แปลว่าไม่ได้ทำงาน)</div>
     </div>
     <div class="gh-outer">
       <div class="gh-month-row" id="gh-mlbls"></div>
@@ -564,8 +564,8 @@ code{font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(99,10
 <!-- ══ S11 CLOSING ══ -->
 <div class="slide s-close" id="s11">
   <div class="eyebrow" style="margin-bottom:12px">UFicon · Developer · มิ.ย.–19 ส.ค. 2026 (Interim)</div>
-  <div class="close-num"><span class="grad">64</span></div>
-  <div style="font-size:18px;color:var(--mid);margin-top:4px">วันที่ทำงานใน 80 วัน (80%)</div>
+  <div class="close-num"><span class="grad">1,054</span></div>
+  <div style="font-size:18px;color:var(--mid);margin-top:4px">Total Commits — มิ.ย.–19 ส.ค. 2569</div>
   <div style="display:flex;gap:20px;margin-top:28px">
     <div style="text-align:center;padding:16px 28px;background:var(--card);border:1px solid var(--b1);border-radius:10px">
       <div style="font-size:36px;font-weight:900;color:#a5b4fc">10</div><div style="font-size:10px;color:var(--muted)">Projects</div>
@@ -666,7 +666,7 @@ weeks.forEach(w=>{
 });
 const footer=document.getElementById('act-footer');
 const mStats=[
-  {m:'มิ.ย.',d:20,c:'#a5b4fc'},{m:'ก.ค.',d:25,c:'#67e8f9'},{m:'ส.ค. (ถึง19)',d:19,c:'#fbbf24'},
+  {m:'มิ.ย.',d:330,c:'#a5b4fc'},{m:'ก.ค.',d:396,c:'#67e8f9'},{m:'ส.ค. (ถึง19)',d:328,c:'#fbbf24'},
 ];
 footer.innerHTML=`<div style="display:flex;align-items:center;gap:5px">
   <span style="font-size:9px;color:var(--muted)">น้อย</span>
@@ -676,10 +676,10 @@ footer.innerHTML=`<div style="display:flex;align-items:center;gap:5px">
 mStats.forEach(({m,d,c})=>{
   const el=document.createElement('div');
   el.className='act-month-stat';
-  el.innerHTML=`<div class="act-month-n" style="color:${c}">${d}</div><div class="act-month-lbl">${m}</div>`;
+  el.innerHTML=`<div class="act-month-n" style="color:${c}">${d}</div><div class="act-month-lbl">${m} (commits)</div>`;
   footer.appendChild(el);
 });
-footer.innerHTML+=`<div style="margin-left:auto;font-size:11px;font-weight:700;color:var(--mid)">Total: <span style="color:var(--a1)">64</span> active days / 80 days</div>`;
+footer.innerHTML+=`<div style="margin-left:auto;font-size:11px;font-weight:700;color:var(--mid)">Total: <span style="color:var(--a1)">1,054</span> commits · มิ.ย.–19 ส.ค.</div>`;
 
 // ── DELIVERY LOG (S3 + S4) ────────────────────────────────────────────────────
 const weeks_data=[
