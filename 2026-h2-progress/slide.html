@@ -29,7 +29,7 @@
   --text: #e2e8f0;
   --mid: #94a3b8;
   --muted: #475569;
-  --b1: rgba(99, 102, 241, 0.2);
+  --b1: rgba(99, 102, 241, 0.22);
   --b2: rgba(255, 255, 255, 0.08);
 }
 
@@ -52,7 +52,7 @@ html, body {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 10%, rgba(99, 102, 241, 0.09) 0%, transparent 70%),
+  background: radial-gradient(circle at 50% 10%, rgba(99, 102, 241, 0.1) 0%, transparent 70%),
               radial-gradient(circle at 90% 90%, rgba(34, 211, 238, 0.06) 0%, transparent 60%),
               #030712;
 }
@@ -78,7 +78,7 @@ html, body {
   pointer-events: none;
   transform: translateX(36px);
   transition: all 0.32s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 32px 48px;
+  padding: 30px 46px;
   overflow: hidden;
 }
 
@@ -93,7 +93,6 @@ html, body {
   transform: translateX(-36px);
 }
 
-/* Subtle dot grid overlay */
 .slide::after {
   content: '';
   position: absolute;
@@ -109,14 +108,14 @@ html, body {
   z-index: 1;
 }
 
-/* Navigation controls */
+/* Controls */
 #controls {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-top: 12px;
   padding: 8px 20px;
-  background: rgba(12, 18, 32, 0.88);
+  background: rgba(12, 18, 32, 0.9);
   backdrop-filter: blur(16px);
   border-radius: 100px;
   border: 1px solid rgba(99, 102, 241, 0.25);
@@ -153,22 +152,22 @@ html, body {
 }
 
 .pill-btn {
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: 100px;
   font-size: 11px;
   font-weight: 700;
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  background: rgba(99, 102, 241, 0.15);
   color: #a5b4fc;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   transition: all 0.18s ease;
 }
 
 .pill-btn:hover {
-  background: rgba(99, 102, 241, 0.28);
+  background: rgba(99, 102, 241, 0.3);
   border-color: var(--a2);
   color: #67e8f9;
 }
@@ -232,30 +231,6 @@ html, body {
   background-clip: text;
 }
 
-.grad2 {
-  background: linear-gradient(135deg, #fbbf24 0%, #f43f5e 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.grad-green {
-  background: linear-gradient(135deg, #34d399 0%, #22d3ee 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-code {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  background: rgba(99, 102, 241, 0.18);
-  color: #c4b5fd;
-  padding: 1px 6px;
-  border-radius: 4px;
-  border: 1px solid rgba(99, 102, 241, 0.25);
-}
-
 .badge {
   display: inline-flex;
   align-items: center;
@@ -277,7 +252,7 @@ code {
 .slide-hdr {
   display: flex;
   align-items: baseline;
-  gap: 16px;
+  justify-content: space-between;
   margin-bottom: 12px;
 }
 
@@ -352,7 +327,7 @@ code {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 4.5px;
+  gap: 5px;
 }
 
 .fl li {
@@ -524,7 +499,7 @@ code {
 .c4 { background: #6366f1; box-shadow: 0 0 10px rgba(99, 102, 241, 0.6); }
 .c5 { background: #818cf8; box-shadow: 0 0 14px rgba(129, 140, 248, 0.85); }
 
-/* Timeline & Gantt */
+/* Timeline */
 .timeline-list {
   display: flex;
   flex-direction: column;
@@ -550,6 +525,132 @@ code {
   font-family: 'JetBrains Mono', monospace;
   width: 90px;
   flex-shrink: 0;
+}
+
+/* ── BUG WALL & SYSTEM WORK STYLES (Slide 6) ── */
+.bug-wall-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 18px;
+  flex: 1;
+  min-height: 0;
+}
+
+.sys-counts-col {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  background: var(--card);
+  border: 1px solid var(--b1);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.sys-stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  background: var(--card2);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+}
+
+.sys-stat-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sys-stat-count {
+  font-size: 13px;
+  font-weight: 900;
+  color: #a5b4fc;
+  font-family: 'JetBrains Mono';
+}
+
+.task-cards-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.task-feature-card {
+  background: var(--card);
+  border: 1px solid var(--b1);
+  border-radius: 9px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}
+
+.task-feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 3px; height: 100%;
+  background: var(--a1);
+  border-top-left-radius: 9px;
+  border-bottom-left-radius: 9px;
+}
+
+.task-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-title-lg {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.2px;
+}
+
+.task-items-box {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 2px;
+}
+
+.task-line {
+  font-size: 11px;
+  color: var(--mid);
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.tag-feat {
+  font-size: 8.5px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.tag-bug {
+  font-size: 8.5px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(244, 63, 94, 0.15);
+  color: #fb7185;
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  flex-shrink: 0;
+  margin-top: 1px;
 }
 
 /* Modals */
@@ -585,19 +686,19 @@ code {
 <!-- ══════════════════════════════════════════════════════════════════
      SLIDE 1 — TITLE & HERO METRICS
      ══════════════════════════════════════════════════════════════════ -->
-<div class="slide active" id="s1" style="background: radial-gradient(ellipse at 10% 50%, rgba(99, 102, 241, 0.18) 0%, transparent 55%), radial-gradient(ellipse at 90% 20%, rgba(34, 211, 238, 0.12) 0%, transparent 45%), var(--bg); padding: 46px 64px;">
-  <div style="display: flex; gap: 50px; height: 100%; align-items: center;">
+<div class="slide active" id="s1" style="background: radial-gradient(ellipse at 10% 50%, rgba(99, 102, 241, 0.18) 0%, transparent 55%), radial-gradient(ellipse at 90% 20%, rgba(34, 211, 238, 0.12) 0%, transparent 45%), var(--bg); padding: 44px 60px;">
+  <div style="display: flex; gap: 48px; height: 100%; align-items: center;">
     <div style="flex: 1.25;">
       <div class="eyebrow" style="margin-bottom: 12px">UFicon · Developer Progress Report · 2026 H2</div>
-      <div style="font-size: 74px; font-weight: 900; line-height: 0.92; letter-spacing: -3px;">
+      <div style="font-size: 72px; font-weight: 900; line-height: 0.92; letter-spacing: -3px;">
         <span class="grad">Dev</span><br>
-        <span style="color: #fff">Radar</span> <span style="font-size: 30px; font-weight: 700; color: var(--a2); vertical-align: middle; margin-left: 8px; padding: 4px 14px; border: 1px solid rgba(34, 211, 238, 0.3); border-radius: 100px; background: rgba(34, 211, 238, 0.08);">H2 Progress</span>
+        <span style="color: #fff">Radar</span> <span style="font-size: 28px; font-weight: 700; color: var(--a2); vertical-align: middle; margin-left: 8px; padding: 4px 14px; border: 1px solid rgba(34, 211, 238, 0.3); border-radius: 100px; background: rgba(34, 211, 238, 0.08);">H2 Progress</span>
       </div>
-      <p style="font-size: 14px; color: var(--mid); margin-top: 18px; line-height: 1.7;">
+      <p style="font-size: 14px; color: var(--mid); margin-top: 16px; line-height: 1.7;">
         สรุปผลงานวิศวกรรมระบบทั้งหมดของ <strong>UFicon</strong> ช่วง <strong style="color: #fff">มิถุนายน – สิงหาคม 2569</strong><br>
         ครอบคลุม DAPP Storefront, Admin CMS, Bolttech, PRF, AppleCare, Interview, UAT Tracker & DevOps
       </p>
-      <div style="display: flex; gap: 24px; margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(99, 102, 241, 0.18);">
+      <div style="display: flex; gap: 24px; margin-top: 22px; padding-top: 16px; border-top: 1px solid rgba(99, 102, 241, 0.18);">
         <div>
           <div style="font-size: 8.5px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; font-weight: 700;">Developer</div>
           <div style="font-size: 13px; font-weight: 800; margin-top: 2px; color: #fff;">Pongpisut M. (M2Dev)</div>
@@ -613,36 +714,36 @@ code {
       </div>
     </div>
     <div style="flex: 1; display: flex; flex-direction: column; gap: 9px;">
-      <div class="pcard" style="padding: 12px 16px; flex-direction: row; align-items: center; gap: 16px;">
-        <div style="font-size: 32px; font-weight: 900; color: #a5b4fc; line-height: 1; font-family: 'JetBrains Mono';">159</div>
+      <div class="pcard" style="padding: 11px 15px; flex-direction: row; align-items: center; gap: 14px;">
+        <div style="font-size: 30px; font-weight: 900; color: #a5b4fc; line-height: 1; font-family: 'JetBrains Mono';">159</div>
         <div>
           <div style="font-size: 12px; font-weight: 800; color: #fff;">Active Engineering Sessions</div>
           <div style="font-size: 9.5px; color: var(--muted);">มิ.ย. (61) · ก.ค. (56) · ส.ค. (42) — เฉลี่ย 2 sessions/วัน</div>
         </div>
       </div>
-      <div class="pcard" style="padding: 12px 16px; flex-direction: row; align-items: center; gap: 16px;">
-        <div style="font-size: 32px; font-weight: 900; color: #67e8f9; line-height: 1; font-family: 'JetBrains Mono';">7</div>
+      <div class="pcard" style="padding: 11px 15px; flex-direction: row; align-items: center; gap: 14px;">
+        <div style="font-size: 30px; font-weight: 900; color: #67e8f9; line-height: 1; font-family: 'JetBrains Mono';">7</div>
         <div>
           <div style="font-size: 12px; font-weight: 800; color: #fff;">Core Enterprise Platforms</div>
           <div style="font-size: 9.5px; color: var(--muted);">DAPP Store, Admin CMS, Bolttech, PRF, ACC, Interview, UAT</div>
         </div>
       </div>
-      <div class="pcard" style="padding: 12px 16px; flex-direction: row; align-items: center; gap: 16px;">
-        <div style="font-size: 32px; font-weight: 900; color: #fbbf24; line-height: 1; font-family: 'JetBrains Mono';">159</div>
+      <div class="pcard" style="padding: 11px 15px; flex-direction: row; align-items: center; gap: 14px;">
+        <div style="font-size: 30px; font-weight: 900; color: #fbbf24; line-height: 1; font-family: 'JetBrains Mono';">159</div>
         <div>
           <div style="font-size: 12px; font-weight: 800; color: #fff;">Bugs & Hotfixes Resolved</div>
           <div style="font-size: 9.5px; color: var(--muted);">Avg Fix Time &lt; 1.5h · Zero Data Loss · 0 Overnight Downtime</div>
         </div>
       </div>
-      <div class="pcard" style="padding: 12px 16px; flex-direction: row; align-items: center; gap: 16px;">
-        <div style="font-size: 32px; font-weight: 900; color: #34d399; line-height: 1; font-family: 'JetBrains Mono';">42+</div>
+      <div class="pcard" style="padding: 11px 15px; flex-direction: row; align-items: center; gap: 14px;">
+        <div style="font-size: 30px; font-weight: 900; color: #34d399; line-height: 1; font-family: 'JetBrains Mono';">42+</div>
         <div>
           <div style="font-size: 12px; font-weight: 800; color: #fff;">Production Features Shipped</div>
           <div style="font-size: 9.5px; color: var(--muted);">Facet Filter, Sticky Gallery, BOPIS Slots, PRF AI, Trade-In, Monaco</div>
         </div>
       </div>
-      <div class="pcard" style="padding: 12px 16px; flex-direction: row; align-items: center; gap: 16px;">
-        <div style="font-size: 32px; font-weight: 900; color: #f87171; line-height: 1; font-family: 'JetBrains Mono';">100%</div>
+      <div class="pcard" style="padding: 11px 15px; flex-direction: row; align-items: center; gap: 14px;">
+        <div style="font-size: 30px; font-weight: 900; color: #f87171; line-height: 1; font-family: 'JetBrains Mono';">100%</div>
         <div>
           <div style="font-size: 12px; font-weight: 800; color: #fff;">Automated CI/CD & Deploy Gate</div>
           <div style="font-size: 9.5px; color: var(--muted);">Coolify Auto-Deploy + PVE Caddy Proxy + Staging Verifications</div>
@@ -658,8 +759,10 @@ code {
 <div class="slide" id="s2" style="background: radial-gradient(ellipse at 80% 30%, rgba(99, 102, 241, 0.08), transparent 50%), var(--bg);">
   <div class="eyebrow" style="margin-bottom: 4px">Activity & Cadence</div>
   <div class="slide-hdr">
-    <div class="slide-title">Engineering Velocity — มิถุนายน ถึง สิงหาคม 2569</div>
-    <div class="slide-sub">12 สัปดาห์ต่อเนื่อง · 159 Sessions · ความหนาแน่นของงานระดับเข้มข้นทุกวัน</div>
+    <div>
+      <div class="slide-title">Engineering Velocity — มิถุนายน ถึง สิงหาคม 2569</div>
+      <div class="slide-sub">12 สัปดาห์ต่อเนื่อง · 159 Sessions · ความหนาแน่นของงานระดับเข้มข้นทุกวัน</div>
+    </div>
   </div>
   
   <div class="gh-outer">
@@ -712,8 +815,10 @@ code {
 <div class="slide" id="s3" style="background: radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.08), transparent 50%), var(--bg);">
   <div class="eyebrow" style="margin-bottom: 4px">FullStack Architecture</div>
   <div class="slide-hdr">
-    <div class="slide-title">UFicon Tech Stack — 4 Core Architecture Layers</div>
-    <div class="slide-sub">1 Developer · ดูแลครบทุก Layer ตั้งแต่ Frontend Pixel-Perfect จนถึง Database & PVE Cluster</div>
+    <div>
+      <div class="slide-title">UFicon Tech Stack — 4 Core Architecture Layers</div>
+      <div class="slide-sub">1 Developer · ดูแลครบทุก Layer ตั้งแต่ Frontend Pixel-Perfect จนถึง Database & PVE Cluster</div>
+    </div>
   </div>
 
   <div class="layer-row" style="background: rgba(99, 102, 241, 0.06);">
@@ -790,8 +895,10 @@ code {
 <div class="slide" id="s4">
   <div class="eyebrow" style="margin-bottom: 4px">Chronology</div>
   <div class="slide-hdr">
-    <div class="slide-title">H2 Execution Timeline — ลำดับการส่งมอบงานสำคัญ 12 สัปดาห์</div>
-    <div class="slide-sub">บันทึกประวัติการพัฒนาจาก Retrospective จริง ตลอดเดือนมิถุนายน ถึง สิงหาคม 2569</div>
+    <div>
+      <div class="slide-title">H2 Execution Timeline — ลำดับการส่งมอบงานสำคัญ 12 สัปดาห์</div>
+      <div class="slide-sub">บันทึกประวัติการพัฒนาจาก Retrospective จริง ตลอดเดือนมิถุนายน ถึง สิงหาคม 2569</div>
+    </div>
   </div>
 
   <div class="timeline-list">
@@ -834,8 +941,10 @@ code {
 <div class="slide" id="s5">
   <div class="eyebrow" style="margin-bottom: 4px">Delivery & Roadmap</div>
   <div class="slide-hdr">
-    <div class="slide-title">H2 Delivery Status — สถานะระบบและฟีเจอร์สำคัญ</div>
-    <div class="slide-sub">แบ่งตามสถานะ Live, Hardened, Infrastructure และ แผนงานระยะถัดไป</div>
+    <div>
+      <div class="slide-title">H2 Delivery Status — สถานะระบบและฟีเจอร์สำคัญ</div>
+      <div class="slide-sub">แบ่งตามสถานะ Live, Hardened, Infrastructure และ แผนงานระยะถัดไป</div>
+    </div>
   </div>
 
   <div class="card-grid-4">
@@ -922,129 +1031,130 @@ code {
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════════
-     SLIDE 6 — BUG & INCIDENT RESOLUTION DASHBOARD
+     SLIDE 6 — REDESIGNED: CORE TASKS & BUG RESOLUTION SUMMARY
      ══════════════════════════════════════════════════════════════════ -->
 <div class="slide" id="s6">
-  <div class="eyebrow" style="margin-bottom: 4px">Incident Response & Quality</div>
-  <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px;">
+  <div class="eyebrow" style="margin-bottom: 4px">Incident Response & Feature Velocity</div>
+  <div class="slide-hdr">
     <div>
-      <span class="slide-title">The Bug & Hotfix Wall — 159 ปัญหาแก้ไขสำเร็จ</span>
-      <span class="slide-sub" style="margin-left: 12px;">Zero Fault Sentinel · ทุกปัญหาถูกแก้ไขและ Deploy ภายในวันเดียว</span>
+      <div class="slide-title">159 Tasks & Bug Fixes — สรุปงานและสถิติแยกตามระบบ</div>
+      <div class="slide-sub">Zero Fault Sentinel · สรุปชัดเจนว่า Add Feature อะไร, Fix Bug อะไร และแต่ละระบบแก้ไขกี่ครั้ง</div>
     </div>
     <button class="pill-btn" onclick="openBugModal()">
-      <span style="font-size: 13px;">🔍</span> เปิดดู Log ทั้ง 159 รายการ (กด B)
+      <span>🔍</span> เปิดดู Log ทั้ง 159 รายการ (กด B)
     </button>
   </div>
 
-  <div class="bug-layout">
-    <div class="bug-bars-col">
-      <div style="font-size: 11px; font-weight: 800; color: #fff; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">สถิติตามระบบ (159 รายการ)</div>
-      
-      <div class="b-bar-row">
-        <div class="b-bar-lbl">DAPP Frontend/Admin</div>
-        <div class="b-bar-track"><div class="b-bar-fill" style="width: 56%; background: #818cf8;"></div></div>
-        <div class="b-bar-n" style="color: #a5b4fc;">89</div>
+  <div class="bug-wall-grid">
+    <!-- LEFT: System Stats Breakdown -->
+    <div class="sys-counts-col">
+      <div style="font-size: 11px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px;">
+        🛠️ จำนวนงานแก้แยกตามระบบ
       </div>
 
-      <div class="b-bar-row">
-        <div class="b-bar-lbl">Bolttech Insurance</div>
-        <div class="b-bar-track"><div class="b-bar-fill" style="width: 15%; background: #22d3ee;"></div></div>
-        <div class="b-bar-n" style="color: #67e8f9;">17</div>
+      <div class="sys-stat-row">
+        <div class="sys-stat-name"><span>🛒</span> DAPP Storefront/Admin</div>
+        <div class="sys-stat-count">89 ครั้ง</div>
       </div>
 
-      <div class="b-bar-row">
-        <div class="b-bar-lbl">FFD / Education SSO</div>
-        <div class="b-bar-track"><div class="b-bar-fill" style="width: 11%; background: #fbbf24;"></div></div>
-        <div class="b-bar-n" style="color: #fbbf24;">11</div>
+      <div class="sys-stat-row">
+        <div class="sys-stat-name"><span>🛡️</span> Bolttech Insurance</div>
+        <div class="sys-stat-count">17 ครั้ง</div>
       </div>
 
-      <div class="b-bar-row">
-        <div class="b-bar-lbl">DevOps & Infra</div>
-        <div class="b-bar-track"><div class="b-bar-fill" style="width: 10%; background: #34d399;"></div></div>
-        <div class="b-bar-n" style="color: #34d399;">10</div>
+      <div class="sys-stat-row">
+        <div class="sys-stat-name"><span>🎓</span> FFD / Education SSO</div>
+        <div class="sys-stat-count">11 ครั้ง</div>
       </div>
 
-      <div class="b-bar-row">
-        <div class="b-bar-lbl">Interview & HR</div>
-        <div class="b-bar-track"><div class="b-bar-fill" style="width: 6%; background: #f43f5e;"></div></div>
-        <div class="b-bar-n" style="color: #fb7185;">6</div>
+      <div class="sys-stat-row">
+        <div class="sys-stat-name"><span>🏗️</span> DevOps, Infra & Proxy</div>
+        <div class="sys-stat-count">10 ครั้ง</div>
       </div>
 
-      <div class="b-bar-row">
-        <div class="b-bar-lbl">Apple ACC & PRF</div>
-        <div class="b-bar-track"><div class="b-bar-fill" style="width: 7%; background: #a855f7;"></div></div>
-        <div class="b-bar-n" style="color: #c084fc;">7</div>
+      <div class="sys-stat-row">
+        <div class="sys-stat-name"><span>✍️</span> UFicon PRF (E-Sign/AI)</div>
+        <div class="sys-stat-count">7 ครั้ง</div>
       </div>
 
-      <div style="margin-top: 10px; padding: 10px; background: rgba(99, 102, 241, 0.08); border-radius: 8px; border: 1px solid var(--b1);">
-        <div style="font-size: 10px; font-weight: 700; color: #fff; margin-bottom: 4px;">⚡ ระยะเวลาแก้ไข (Fix Time):</div>
-        <div style="display: flex; justify-content: space-between; font-size: 9.5px; color: var(--mid);">
-          <span>&lt;1 ชั่วโมง (Fast): <strong style="color: #34d399;">68%</strong></span>
-          <span>1-2 ชม. (Normal): <strong style="color: #fbbf24;">24%</strong></span>
-          <span>Deep Debug: <strong style="color: #fb7185;">8%</strong></span>
+      <div class="sys-stat-row">
+        <div class="sys-stat-name"><span>👥</span> Interview & HR Portal</div>
+        <div class="sys-stat-count">6 ครั้ง</div>
+      </div>
+
+      <div class="sys-stat-row">
+        <div class="sys-stat-name"><span>🍏</span> AppleCare ACC & UAT</div>
+        <div class="sys-stat-count">6 ครั้ง</div>
+      </div>
+
+      <div style="margin-top: auto; padding: 8px 10px; background: rgba(16, 185, 129, 0.08); border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.25);">
+        <div style="font-size: 9.5px; font-weight: 700; color: #34d399; margin-bottom: 2px;">⚡ ความเร็วการแก้ไข (Fix Speed):</div>
+        <div style="font-size: 9px; color: var(--mid);">
+          &lt;1h (Fast): <strong style="color:#34d399">68%</strong> · 1-2h: <strong style="color:#fbbf24">24%</strong> · Deep: <strong style="color:#fb7185">8%</strong>
         </div>
       </div>
     </div>
 
-    <div class="bug-list-col">
-      <div class="b-row">
-        <div class="b-date">18 ส.ค. 69</div>
-        <div class="b-proj">DAPP</div>
-        <div class="b-txt">
-          <div class="b-title">PLP Row Image vs FamilyStripe Strip Column Conflict</div>
-          <div class="b-detail">แก้โดยแยกคอลัมน์ <code>pd_plp_image</code> เฉพาะ PLP row + บัสแคช Redis Production</div>
+    <!-- RIGHT: Big High-Impact Task Highlights -->
+    <div class="task-cards-col">
+      <!-- DAPP Storefront -->
+      <div class="task-feature-card">
+        <div class="task-header-row">
+          <div class="task-title-lg">DAPP Storefront — Search Facets & Sticky Gallery (89 งานแก้)</div>
+          <span class="badge b-live">STOREFRONT</span>
         </div>
-        <span class="badge b-live">&lt;1h</span>
+        <div class="task-items-box">
+          <div class="task-line"><span class="tag-feat">UPDATE / FEATURE</span> <span>เพิ่ม Waterfall Facet Engine ค้นหาเรียลไทม์ &lt;15ms, Price Range Slider, และ Sticky Gallery 4 รอบ</span></div>
+          <div class="task-line"><span class="tag-bug">BUG FIXED</span> <span>แก้ปัญหาสเตตัส Out of Stock ไม่ขึ้นปุ่มแจ้งเตือน, Badges Alignment ไม่ตรง, และ URL Sync หลุด</span></div>
+        </div>
       </div>
 
-      <div class="b-row">
-        <div class="b-date">18 ส.ค. 69</div>
-        <div class="b-proj">AppleCare</div>
-        <div class="b-txt">
-          <div class="b-title">AppleCare Connect create-order 100% Failure Diagnosis</div>
-          <div class="b-detail">วิเคราะห์ Live Transaction Log ชี้ชัดเป็น Apple Backend Fault พร้อมแจ้งทีม POS ทันที</div>
+      <!-- DAPP Admin -->
+      <div class="task-feature-card">
+        <div class="task-header-row">
+          <div class="task-title-lg">DAPP Admin — PLP Image Split & Monaco CMS</div>
+          <span class="badge b-done">ADMIN CMS</span>
         </div>
-        <span class="badge b-uat">Audit</span>
+        <div class="task-items-box">
+          <div class="task-line"><span class="tag-feat">UPDATE / FEATURE</span> <span>สร้างระบบ Zip Package Upload หน้าการตลาด, Monaco Code Editor แก้สดบนแอดมิน, และ Sandboxed Preview</span></div>
+          <div class="task-line"><span class="tag-bug">BUG FIXED</span> <span>แยกคอลัมน์ <code>pd_plp_image</code> เฉพาะ PLP row ตัดปัญหาชิป FamilyStripe พังทั้ง LOB พร้อมบัสแคช Redis Production</span></div>
+        </div>
       </div>
 
-      <div class="b-row">
-        <div class="b-date">14 ส.ค. 69</div>
-        <div class="b-proj">DAPP</div>
-        <div class="b-txt">
-          <div class="b-title">Search Waterfall Facet Sync & Price Range Filter Bug</div>
-          <div class="b-detail">ต่อ API จริง เชื่อม Facet Filter กับ URL Query Params และแก้ Badges Alignment</div>
+      <!-- Bolttech -->
+      <div class="task-feature-card">
+        <div class="task-header-row">
+          <div class="task-title-lg">Bolttech Insurance — FileMaker (UPOS) Sync (17 งานแก้)</div>
+          <span class="badge b-live">MICROSERVICE</span>
         </div>
-        <span class="badge b-live">&lt;1h</span>
+        <div class="task-items-box">
+          <div class="task-line"><span class="tag-feat">UPDATE / FEATURE</span> <span>ระบบ Quoting เบี้ยประกันสด, Cancel Callback Flow, หน้าจัดการ Webhook Logs UI พร้อมปุ่ม Resend</span></div>
+          <div class="task-line"><span class="tag-bug">BUG FIXED</span> <span>เพิ่ม Active-status Gating ป้องกัน Push ซ้ำเข้า FileMaker, แก้ไข Thai Address Parser, และ Webhook Race Condition</span></div>
+        </div>
       </div>
 
-      <div class="b-row">
-        <div class="b-date">06 ส.ค. 69</div>
-        <div class="b-proj">DAPP</div>
-        <div class="b-txt">
-          <div class="b-title">BOPIS StoreLocatorDrawer Stock & Lead Time Missing</div>
-          <div class="b-detail">รองรับการเลือกสาขารับสินค้า พร้อมตรวจสอบสต็อกและแสดงแผนที่ Apple Maps</div>
+      <!-- PRF -->
+      <div class="task-feature-card">
+        <div class="task-header-row">
+          <div class="task-title-lg">UFicon PRF — E-Signature & Gemini AI OCR (7 งานแก้)</div>
+          <span class="badge b-uat">INTERNAL TOOL</span>
         </div>
-        <span class="badge b-live">&lt;1h</span>
+        <div class="task-items-box">
+          <div class="task-line"><span class="tag-feat">UPDATE / FEATURE</span> <span>ระบบวาดลายเซ็นดิจิทัล Canvas UX Overhaul, AI OCR ใบแจ้งหนี้อัตโนมัติด้วย Gemini 1.5 Flash พร้อม AI Summary</span></div>
+          <div class="task-line"><span class="tag-bug">BUG FIXED</span> <span>แก้ไขปัญหา Drag & Drop ไฟล์แนบหลุด, ระบบ Skip Approval ตามวงเงิน, และ Traefik Reverse Proxy Deployment</span></div>
+        </div>
       </div>
 
-      <div class="b-row">
-        <div class="b-date">04 ส.ค. 69</div>
-        <div class="b-proj">Bolttech</div>
-        <div class="b-txt">
-          <div class="b-title">Bolttech Cancel Callback & FileMaker Push Race Condition</div>
-          <div class="b-detail">เพิ่ม Active-status gate ป้องกันการส่งสถานะซ้ำซ้อน และเพิ่มปุ่ม Resend UI บนแอดมิน</div>
+      <!-- Checkout & ACC -->
+      <div class="task-feature-card">
+        <div class="task-header-row">
+          <div class="task-title-lg">Checkout Hardening & AppleCare Connect Triage (6 งานแก้)</div>
+          <span class="badge b-hotfix">PAYMENT & VENDOR</span>
         </div>
-        <span class="badge b-live">&lt;1h</span>
-      </div>
-
-      <div class="b-row">
-        <div class="b-date">21 ก.ค. 69</div>
-        <div class="b-proj">UFicon PRF</div>
-        <div class="b-txt">
-          <div class="b-title">PRF Digital Signature Upload & AI OCR Summary Integration</div>
-          <div class="b-detail">อัปเกรด Canvas เซ็นเอกสาร + Gemini 1.5 Flash แปลงใบแจ้งหนี้เป็นฟอร์มอัตโนมัติ</div>
+        <div class="task-items-box">
+          <div class="task-line"><span class="tag-feat">UPDATE / FEATURE</span> <span>ระบบ 2C2P Payment Gateway, CompAsia Trade-In Step 4, Rule-based FBT Engine, และ 6 Transactional Emails</span></div>
+          <div class="task-line"><span class="tag-bug">BUG FIXED</span> <span>วิเคราะห์ Log แยก Apple-side 100% create-order Failure, แก้ KBank Webhook Mutex Race, Sprintf Crash</span></div>
         </div>
-        <span class="badge b-live">1-2h</span>
       </div>
     </div>
   </div>
@@ -1056,8 +1166,10 @@ code {
 <div class="slide" id="s7">
   <div class="eyebrow" style="margin-bottom: 4px">DAPP Storefront</div>
   <div class="slide-hdr">
-    <div class="slide-title">Search & Facet Engine — สถาปัตยกรรมค้นหาความเร็วสูง</div>
-    <div class="slide-sub">Client-side Dynamic Indexing · Waterfall Filter · Real-time URL Sync · Performance Tuning</div>
+    <div>
+      <div class="slide-title">Search & Facet Engine — สถาปัตยกรรมค้นหาความเร็วสูง</div>
+      <div class="slide-sub">Client-side Dynamic Indexing · Waterfall Filter · Real-time URL Sync · Performance Tuning</div>
+    </div>
   </div>
 
   <div class="card-grid-3">
@@ -1105,8 +1217,10 @@ code {
 <div class="slide" id="s8">
   <div class="eyebrow" style="margin-bottom: 4px">DAPP Storefront</div>
   <div class="slide-hdr">
-    <div class="slide-title">Dynamic PDP Configurator — ระบบเลือกสเปกสินค้าและแกลเลอรี</div>
-    <div class="slide-sub">Matrix Variants · Live Pricing · Sticky Image Gallery · Headless Browser QA Verification</div>
+    <div>
+      <div class="slide-title">Dynamic PDP Configurator — ระบบเลือกสเปกสินค้าและแกลเลอรี</div>
+      <div class="slide-sub">Matrix Variants · Live Pricing · Sticky Image Gallery · Headless Browser QA Verification</div>
+    </div>
   </div>
 
   <div class="card-grid-3">
@@ -1145,8 +1259,10 @@ code {
 <div class="slide" id="s9">
   <div class="eyebrow" style="margin-bottom: 4px">DAPP Storefront</div>
   <div class="slide-hdr">
-    <div class="slide-title">BOPIS & Store Locator — ระบบเลือกรับสินค้าที่สาขาและแผนที่</div>
-    <div class="slide-sub">Buy Online Pick-up in Store · Apple Maps SDK · Postcode Radius · Store Availability Drawer</div>
+    <div>
+      <div class="slide-title">BOPIS & Store Locator — ระบบเลือกรับสินค้าที่สาขาและแผนที่</div>
+      <div class="slide-sub">Buy Online Pick-up in Store · Apple Maps SDK · Postcode Radius · Store Availability Drawer</div>
+    </div>
   </div>
 
   <div class="card-grid-2">
@@ -1183,8 +1299,10 @@ code {
 <div class="slide" id="s10">
   <div class="eyebrow" style="margin-bottom: 4px">DAPP Storefront</div>
   <div class="slide-hdr">
-    <div class="slide-title">Checkout & Payments — ความปลอดภัยและการชำระเงินไร้รอยต่อ</div>
-    <div class="slide-sub">13-Bug Hardening · 2C2P Gateway · KBank Webhook Race Condition Fix · FBT Bundles</div>
+    <div>
+      <div class="slide-title">Checkout & Payments — ความปลอดภัยและการชำระเงินไร้รอยต่อ</div>
+      <div class="slide-sub">13-Bug Hardening · 2C2P Gateway · KBank Webhook Race Condition Fix · FBT Bundles</div>
+    </div>
   </div>
 
   <div class="card-grid-3">
@@ -1223,8 +1341,10 @@ code {
 <div class="slide" id="s11">
   <div class="eyebrow" style="margin-bottom: 4px">DAPP Storefront</div>
   <div class="slide-hdr">
-    <div class="slide-title">CompAsia Trade-In Integration — ระบบประเมินราคาเครื่องเก่าแลกใหม่</div>
-    <div class="slide-sub">4-Step Dynamic Questionnaire · Live Trade-In Quote API · Instant Checkout Discount</div>
+    <div>
+      <div class="slide-title">CompAsia Trade-In Integration — ระบบประเมินราคาเครื่องเก่าแลกใหม่</div>
+      <div class="slide-sub">4-Step Dynamic Questionnaire · Live Trade-In Quote API · Instant Checkout Discount</div>
+    </div>
   </div>
 
   <div class="card-grid-2">
@@ -1262,8 +1382,10 @@ code {
 <div class="slide" id="s12">
   <div class="eyebrow" style="margin-bottom: 4px">DAPP Admin & Architecture</div>
   <div class="slide-hdr">
-    <div class="slide-title">PLP Image Column Split — แก้ปัญหา Schema และ Cache ระดับ Root Cause</div>
-    <div class="slide-sub">Dedicated Column Isolation · Context Separation · Production Redis Invalidation · Zero Incident</div>
+    <div>
+      <div class="slide-title">PLP Image Column Split — แก้ปัญหา Schema และ Cache ระดับ Root Cause</div>
+      <div class="slide-sub">Dedicated Column Isolation · Context Separation · Production Redis Invalidation · Zero Incident</div>
+    </div>
   </div>
 
   <div class="card-grid-2">
@@ -1297,8 +1419,10 @@ code {
 <div class="slide" id="s13">
   <div class="eyebrow" style="margin-bottom: 4px">DAPP Admin CMS</div>
   <div class="slide-hdr">
-    <div class="slide-title">Marketing Page Engine & Monaco CMS — ยกระดับความคล่องตัวให้ทีมการตลาด</div>
-    <div class="slide-sub">Zip Upload Engine · Monaco Fullscreen Editor · Sandboxed Iframe Preview · Soft Deletes</div>
+    <div>
+      <div class="slide-title">Marketing Page Engine & Monaco CMS — ยกระดับความคล่องตัวให้ทีมการตลาด</div>
+      <div class="slide-sub">Zip Upload Engine · Monaco Fullscreen Editor · Sandboxed Iframe Preview · Soft Deletes</div>
+    </div>
   </div>
 
   <div class="card-grid-3">
@@ -1337,8 +1461,10 @@ code {
 <div class="slide" id="s14">
   <div class="eyebrow" style="margin-bottom: 4px">Enterprise Microservice</div>
   <div class="slide-hdr">
-    <div class="slide-title">Bolttech Service — ระบบประกันอุปกรณ์และการเชื่อมต่อ FileMaker</div>
-    <div class="slide-sub">Node.js · Fastify · PostgreSQL · Bi-directional UPOS Sync · Webhook Resiliency</div>
+    <div>
+      <div class="slide-title">Bolttech Service — ระบบประกันอุปกรณ์และการเชื่อมต่อ FileMaker</div>
+      <div class="slide-sub">Node.js · Fastify · PostgreSQL · Bi-directional UPOS Sync · Webhook Resiliency</div>
+    </div>
   </div>
 
   <div class="card-grid-2">
@@ -1378,8 +1504,10 @@ code {
 <div class="slide" id="s15">
   <div class="eyebrow" style="margin-bottom: 4px">Internal Digital Workflow</div>
   <div class="slide-hdr">
-    <div class="slide-title">UFicon PRF — ระบบอนุมัติจ่ายดิจิทัล พร้อม AI OCR อัตโนมัติ</div>
-    <div class="slide-sub">Payment Request Form · Digital E-Signature · Gemini AI Vision · Traefik Reverse Proxy</div>
+    <div>
+      <div class="slide-title">UFicon PRF — ระบบอนุมัติจ่ายดิจิทัล พร้อม AI OCR อัตโนมัติ</div>
+      <div class="slide-sub">Payment Request Form · Digital E-Signature · Gemini AI Vision · Traefik Reverse Proxy</div>
+    </div>
   </div>
 
   <div class="card-grid-2">
@@ -1418,8 +1546,10 @@ code {
 <div class="slide" id="s16">
   <div class="eyebrow" style="margin-bottom: 4px">Services & Operations</div>
   <div class="slide-hdr">
-    <div class="slide-title">AppleCare Connect & Recruitment — เสถียรภาพและระบบสรรหาบุคคล</div>
-    <div class="slide-sub">micro-apple-acc · Coolify Microservices · uficon-interview Portal · ServerFn Architecture</div>
+    <div>
+      <div class="slide-title">AppleCare Connect & Recruitment — เสถียรภาพและระบบสรรหาบุคคล</div>
+      <div class="slide-sub">micro-apple-acc · Coolify Microservices · uficon-interview Portal · ServerFn Architecture</div>
+    </div>
   </div>
 
   <div class="card-grid-2">
@@ -1457,8 +1587,10 @@ code {
 <div class="slide" id="s17">
   <div class="eyebrow" style="margin-bottom: 4px">QA & Sentinel DevOps</div>
   <div class="slide-hdr">
-    <div class="slide-title">UAT Tracker & DevOps Sentinel — มาตรฐานและระบบอัตโนมัติ</div>
-    <div class="slide-sub">AI Agent REST APIs · Apple Pixel-Perfect UI · Coolify LVM Expansion · 5 Sentinel Principles</div>
+    <div>
+      <div class="slide-title">UAT Tracker & DevOps Sentinel — มาตรฐานและระบบอัตโนมัติ</div>
+      <div class="slide-sub">AI Agent REST APIs · Apple Pixel-Perfect UI · Coolify LVM Expansion · 5 Sentinel Principles</div>
+    </div>
   </div>
 
   <div class="card-grid-2">
